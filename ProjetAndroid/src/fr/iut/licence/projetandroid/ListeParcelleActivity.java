@@ -7,7 +7,7 @@ import android.view.Menu;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity
+public class ListeParcelleActivity extends Activity
 {
 	/* _________________________________________________________ */
 	/**
@@ -21,7 +21,7 @@ public class MainActivity extends Activity
 	protected void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_listeparcelle);
 	}
 
 	/* _________________________________________________________ */
