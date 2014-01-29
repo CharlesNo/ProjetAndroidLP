@@ -1,13 +1,15 @@
-package fr.iut.licence.projetandroid;
+package fr.iut.licence.projetandroid.presentation;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
+import fr.iut.licence.projetandroid.R;
 
 /**
  * The Class MainActivity.
  */
-public class ListeParcelleActivity extends Activity
+public class ListeParcelleActivity extends ListActivity
 {
 	/* _________________________________________________________ */
 	/**
@@ -22,6 +24,7 @@ public class ListeParcelleActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listeparcelle);
+
 	}
 
 	/* _________________________________________________________ */
@@ -40,4 +43,14 @@ public class ListeParcelleActivity extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	/**
+	 * View Holder Item
+	 *
+	 */
+	static class ViewHolderItem {
+	    public TextView tv_parcelle;
+	    public TextView tv_typeParcelle;
+	}
+
 }
