@@ -8,5 +8,13 @@
     <string name="plotlabel">plotLabel</string>
     <string name="plottype">plotType</string>
     <string name="info">info</string>
+    <string name="plot_image">plot image</string>
+    <string name="plot_name">plot name</string>
+    <string name="culture">Culture : </string>
+    <string name="previous_culture_">Previous culture : </string>
+    <string name="surface_">Surface : </string>
+    <string name="cult">infoCult</string>
+    <string name="prevcult">infoPrevCult</string>
+    <string name="surface">surface</string>
 
 </resources>
