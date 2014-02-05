@@ -1,6 +1,8 @@
 package fr.iut.licence.projetandroid.presentation;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,28 +10,20 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-<<<<<<< HEAD
-=======
-import fr.iut.licence.projetandroid.PlotActivty;
+import fr.iut.licence.projetandroid.PlotArrayAdapter;
 import fr.iut.licence.projetandroid.R;
 import fr.iut.licence.projetandroid.entities.Plot;
->>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 
 /**
  * The Class MainActivity.
  */
-<<<<<<< HEAD
-public class ListeParcelleActivity extends ListActivity implements OnItemClickListener
-{
-	private List<Plot> listPlot;
-=======
+
 public class ListeParcelleActivity extends ListActivity implements
 		OnItemClickListener
 {
 	/** The list plot. */
 	private List<Plot>	listPlot;
 
->>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 	/* _________________________________________________________ */
 	/**
 	 * On create.
@@ -43,7 +37,6 @@ public class ListeParcelleActivity extends ListActivity implements
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listeparcelle);
-<<<<<<< HEAD
 		
 		//TODO get plots for DB.
 		//------------------------test------------------------
@@ -62,10 +55,6 @@ public class ListeParcelleActivity extends ListActivity implements
 		
 		//------------------------test------------------------
 
-=======
-		// TODO get plots for DB.
-		// setListAdapter(new PlotArrayAdapter()));
->>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 	}
 	
 	/* _________________________________________________________ */
@@ -85,18 +74,7 @@ public class ListeParcelleActivity extends ListActivity implements
 		return true;
 	}
 
-<<<<<<< HEAD
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("plot",listPlot.get(position));
-		Intent intent = new Intent (this, PlotActivty.class);
-		intent.putExtra("bundle",bundle);
-	}
-	
-	
-	
-=======
+
 	/* _________________________________________________________ */
 	/**
 	 * On item click.
@@ -121,5 +99,4 @@ public class ListeParcelleActivity extends ListActivity implements
 		final Intent intent = new Intent(this, PlotActivty.class);
 		intent.putExtra("bundle", bundle);
 	}
->>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 }
