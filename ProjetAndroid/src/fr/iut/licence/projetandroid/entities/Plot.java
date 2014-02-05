@@ -10,6 +10,8 @@
 package fr.iut.licence.projetandroid.entities;
 
 import java.io.Serializable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /* _________________________________________________________ */
 /**
@@ -17,25 +19,30 @@ import java.io.Serializable;
  * 
  * @author Charles NEAU
  */
+@DatabaseTable(tableName = "plot")
 public class Plot implements Serializable
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6091604027434736676L;
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= -6091604027434736676L;
 	/** The growing. */
-	private String	growing;
+	@DatabaseField
+	private String				growing;
 	/** The id. */
-	private String	id;
+	@DatabaseField(id = true)
+	private String				id;
 	/** The last_growing. */
-	private String	last_growing;
+	@DatabaseField
+	private String				last_growing;
 	/** The name. */
-	private String	name;
+	@DatabaseField
+	private String				name;
 	/** The surface. */
-	private int		surface;
+	@DatabaseField
+	private int					surface;
 
 	/* _________________________________________________________ */
 	/**
+	 * Instantiates a new plot.
 	 */
 	public Plot()
 	{

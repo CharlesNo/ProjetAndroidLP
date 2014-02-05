@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="fr.iut.licence.projetandroid.MainActivity"
+            android:name=".presentation.ListeParcelleActivity"
             android:label="@string/app_name" 
             
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -24,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="PlotActivty"></activity>
     </application>
 
 </manifest>
