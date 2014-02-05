@@ -8,13 +8,28 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+<<<<<<< HEAD
+=======
+import fr.iut.licence.projetandroid.PlotActivty;
+import fr.iut.licence.projetandroid.R;
+import fr.iut.licence.projetandroid.entities.Plot;
+>>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 
 /**
  * The Class MainActivity.
  */
+<<<<<<< HEAD
 public class ListeParcelleActivity extends ListActivity implements OnItemClickListener
 {
 	private List<Plot> listPlot;
+=======
+public class ListeParcelleActivity extends ListActivity implements
+		OnItemClickListener
+{
+	/** The list plot. */
+	private List<Plot>	listPlot;
+
+>>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 	/* _________________________________________________________ */
 	/**
 	 * On create.
@@ -28,6 +43,7 @@ public class ListeParcelleActivity extends ListActivity implements OnItemClickLi
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listeparcelle);
+<<<<<<< HEAD
 		
 		//TODO get plots for DB.
 		//------------------------test------------------------
@@ -46,6 +62,10 @@ public class ListeParcelleActivity extends ListActivity implements OnItemClickLi
 		
 		//------------------------test------------------------
 
+=======
+		// TODO get plots for DB.
+		// setListAdapter(new PlotArrayAdapter()));
+>>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 	}
 	
 	/* _________________________________________________________ */
@@ -65,6 +85,7 @@ public class ListeParcelleActivity extends ListActivity implements OnItemClickLi
 		return true;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 		Bundle bundle = new Bundle();
@@ -75,4 +96,30 @@ public class ListeParcelleActivity extends ListActivity implements OnItemClickLi
 	
 	
 	
+=======
+	/* _________________________________________________________ */
+	/**
+	 * On item click.
+	 * 
+	 * @param arg0
+	 *            the arg0
+	 * @param v
+	 *            the v
+	 * @param position
+	 *            the position
+	 * @param id
+	 *            the id
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
+	 *      android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(final AdapterView<?> arg0, final View v,
+			final int position, final long id)
+	{
+		final Bundle bundle = new Bundle();
+		bundle.putSerializable("plot", listPlot.get(position));
+		final Intent intent = new Intent(this, PlotActivty.class);
+		intent.putExtra("bundle", bundle);
+	}
+>>>>>>> 808c85046d9deedf62f6e4c882d1857b5cb8d488
 }
