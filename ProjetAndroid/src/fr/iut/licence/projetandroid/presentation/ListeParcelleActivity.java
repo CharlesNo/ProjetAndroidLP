@@ -1,11 +1,6 @@
 package fr.iut.licence.projetandroid.presentation;
 
 import java.util.List;
-import java.util.ArrayList;
-
-import fr.iut.licence.projetandroid.PlotArrayAdapter;
-import fr.iut.licence.projetandroid.R;
-import fr.iut.licence.projetandroid.entities.Plot;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
