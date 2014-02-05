@@ -17,7 +17,6 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import fr.iut.licence.projetandroid.entities.Plot;
 
-// TODO: Auto-generated Javadoc
 /* _________________________________________________________ */
 /**
  * The Class DatabaseHelper.
@@ -26,6 +25,8 @@ import fr.iut.licence.projetandroid.entities.Plot;
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper
 {
+	/** The Constant DATABASE_NAME. */
+	private static final String		DATABASE_NAME		= "DATABASE_ANDROID_PROJECT";
 	/** The Constant DATABASE_VERSION. */
 	private static final int		DATABASE_VERSION	= 0;
 	/** The instance. */
@@ -39,7 +40,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
 	 */
 	private DatabaseHelper(final Context context)
 	{
-		super(context, "DATABASE_NAME", null, DATABASE_VERSION);
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	/**
@@ -105,6 +106,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
 			final ConnectionSource connectionSource, final int oldVersion,
 			final int newVersion)
 	{
+		try
+		{
+			TableUtils.dropTable(connectionSource, Plot.class, true);
+			onCreate(sqLiteDatabase, connectionSource); // Create tables again
+		}
+		catch (final SQLException sqle)
+		{
+		}
 	}
 }
 /* newVersion_______________________________________________ */

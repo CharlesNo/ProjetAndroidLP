@@ -1,7 +1,7 @@
 package fr.iut.licence.projetandroid.presentation;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import fr.iut.licence.projetandroid.PlotArrayAdapter;
 import fr.iut.licence.projetandroid.R;
