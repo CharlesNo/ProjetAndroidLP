@@ -1,16 +1,25 @@
 package fr.iut.licence.projetandroid.presentation;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.iut.licence.projetandroid.PlotArrayAdapter;
+import fr.iut.licence.projetandroid.R;
+import fr.iut.licence.projetandroid.entities.Plot;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.TextView;
-import fr.iut.licence.projetandroid.R;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * The Class MainActivity.
  */
-public class ListeParcelleActivity extends ListActivity
+public class ListeParcelleActivity extends ListActivity implements OnItemClickListener
 {
+	private List<Plot> listPlot;
 	/* _________________________________________________________ */
 	/**
 	 * On create.
@@ -24,9 +33,26 @@ public class ListeParcelleActivity extends ListActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listeparcelle);
+		
+		//TODO get plots for DB.
+		//------------------------test------------------------
+		List<Plot> listPlot = new ArrayList<Plot>();
+		Plot plot = new Plot();
+		plot.setGrowing("blé");
+		plot.setId("0");
+		plot.setLast_growing("maïs");
+		plot.setName("ici");
+		plot.setSurface(150);
+		
+		listPlot.add(plot);
+		
+		PlotArrayAdapter arrayPlot = new PlotArrayAdapter(this, listPlot);
+		setListAdapter(arrayPlot);
+		
+		//------------------------test------------------------
 
 	}
-
+	
 	/* _________________________________________________________ */
 	/**
 	 * On create options menu.
@@ -43,14 +69,15 @@ public class ListeParcelleActivity extends ListActivity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	/**
-	 * View Holder Item
-	 *
-	 */
-	static class ViewHolderItem {
-	    public TextView tv_parcelle;
-	    public TextView tv_typeParcelle;
-	}
 
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("plot",listPlot.get(position));
+		Intent intent = new Intent (this, PlotActivty.class);
+		intent.putExtra("bundle",bundle);
+	}
+	
+	
+	
 }

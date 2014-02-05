@@ -18,8 +18,10 @@
         android:id="@+id/iv_plotImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/plot_image" 
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/ic_launcher"
+        android:contentDescription="@string/plot_image" />
 
     <LinearLayout
         android:layout_width="wrap_content"

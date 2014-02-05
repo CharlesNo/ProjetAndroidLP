@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="fr.iut.licence.projetandroid.MainActivity"
+            android:name="fr.iut.licence.projetandroid.presentation.ListeParcelleActivity"
             android:label="@string/app_name" 
             
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -23,6 +23,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity 
+            android:name="fr.iut.licence.projetandroid.presentation.PlotActivty">
+            
         </activity>
     </application>
 

@@ -1,5 +1,8 @@
-package fr.iut.licence.projetandroid;
+package fr.iut.licence.projetandroid.presentation;
 
+import fr.iut.licence.projetandroid.R;
+import fr.iut.licence.projetandroid.R.id;
+import fr.iut.licence.projetandroid.R.layout;
 import fr.iut.licence.projetandroid.entities.Plot;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +23,7 @@ public class PlotActivty extends Activity{
 		//Load content
 		TextView tv_cult = (TextView)findViewById(R.id.tv_plotCul);
 		TextView tv_cultPrev = (TextView)findViewById(R.id.tv_plotCulPrev);
+		//ImageView iv_plot = (ImageView) findViewById(R.id.iv_plotImg);
 		TextView tv_surface = (TextView)findViewById(R.id.tv_plotSurf);
 		
 		//set info
