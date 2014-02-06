@@ -3,11 +3,14 @@ package fr.iut.licence.projetandroid.presentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -41,7 +44,7 @@ public class ListeParcelleActivity extends Activity
 		setContentView(R.layout.activity_listeparcelle);
 		mContext = this;
 		ListView list = (ListView) findViewById(R.id.liste);
-		
+
 		//TODO get plots for DB.
 		//------------------------test------------------------
 		listPlot = new ArrayList<Plot>();
@@ -51,36 +54,39 @@ public class ListeParcelleActivity extends Activity
 		plot.setLast_growing("maïs");
 		plot.setName("ici");
 		plot.setSurface(150);
-		
+
 		Plot plot1 = new Plot();
 		plot1.setGrowing("blé");
 		plot1.setId("0");
 		plot1.setLast_growing("maïs");
 		plot1.setName("ici");
 		plot1.setSurface(150);
-		
+
 		listPlot.add(plot);
 		listPlot.add(plot1);
-		
+
 
 		//------------------------test------------------------
 		PlotArrayAdapter arrayPlot = new PlotArrayAdapter(this, listPlot);
 		list.setAdapter(arrayPlot);		
-		
+
 		list.setOnItemClickListener(new OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View view, int position,
-                    long id) {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int position,
+					long id) {
 				final Bundle bundle = new Bundle();
 				bundle.putSerializable("plot", listPlot.get(position));
 				final Intent intent = new Intent(mContext, PlotActivty.class);
 				intent.putExtra("bundle", bundle);
 				startActivity(intent);
-            }
-        });
+			}
+		});
+
+		ActionBar ac = getActionBar();
+		ac.show();
 	}
-	
+
 	/* _________________________________________________________ */
 	/**
 	 * On create options menu.
@@ -90,29 +96,30 @@ public class ListeParcelleActivity extends Activity
 	 * @return true, if successful
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
+
 	@Override
-	public boolean onCreateOptionsMenu(final Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
 		return true;
 	}
-
-
+	
 	/* _________________________________________________________ */
-	/**
-	 * On item click.
-	 * 
-	 * @param arg0
-	 *            the arg0
-	 * @param v
-	 *            the v
-	 * @param position
-	 *            the position
-	 * @param id
-	 *            the id
-	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
-	 *      android.view.View, int, long)
-	 */
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.menu_ajoutParcelle:
+			intent = new Intent(this, AjoutParcelleActivity.class);
+			startActivity(intent);
+		case R.id.menu_convertisseur:
+			intent = new Intent(this, ConvertisseurActivity.class);
+			startActivity(intent);
+		default:
+			return super .onOptionsItemSelected(item);
+		}
+	}
+
 
 }

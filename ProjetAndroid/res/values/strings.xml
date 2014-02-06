@@ -16,5 +16,21 @@
     <string name="cult">infoCult</string>
     <string name="prevcult">infoPrevCult</string>
     <string name="surface">surface</string>
+    <string name="contr_le">Contrôle</string>
+    <string name="commande">Commande</string>
+    <string name="convertisseur">Convertisseur</string>
+    <string name="parcelles">Parcelles</string>
+    <string name="ajouter_parcelle">Ajouter Parcelle</string>
+    <string name="nom_">"Nom : "</string>
+    <string name="culture_">Culture :</string>
+    <string name="culture_pr_c_dente_">Culture précédente :</string>
+    <string name="ajouter">Ajouter</string>
+    <string name="densit_de_semis_">Densité de semis :</string>
+    <string name="pgm_">"PGM : "</string>
+    <string name="poids_de_semences_c_cessaire_">"Poids de semences cécessaire : "</string>
+    <string name="_0">0</string>
+    <string name="g">g</string>
+    <string name="grains_m2">grains/m2</string>
+    <string name="kg_ha"> Kg/ha</string>
 
 </resources>

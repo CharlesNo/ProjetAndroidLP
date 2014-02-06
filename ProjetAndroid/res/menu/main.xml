@@ -1,14 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+    
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_ajoutParcelle"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/parcelles"/>
+    <item
+        android:id="@+id/menu_pacelles"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
-   <item
-        android:id="@+id/action_add"
+        android:title="@string/parcelles"/>
+    <item
+        android:id="@+id/menu_convertisseur"
         android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/ajout"/>
-
+        android:showAsAction="never"
+        android:title="@string/convertisseur"/>
+    <item
+        android:id="@+id/menu_commande"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/commande"/>
+    <item
+        android:id="@+id/menu_controle"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/contr_le"/>
 </menu>
