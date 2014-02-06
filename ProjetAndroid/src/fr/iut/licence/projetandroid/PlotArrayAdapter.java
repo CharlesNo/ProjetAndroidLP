@@ -6,17 +6,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 import fr.iut.licence.projetandroid.entities.Plot;
 import fr.iut.licence.projetandroid.entities.ViewHolder;
 
-public class PlotArrayAdapter extends ArrayAdapter<String>  {
+public class PlotArrayAdapter extends BaseAdapter{
 	private final Context mContext;
 	private final List<Plot> mValues;
 	
 	public PlotArrayAdapter(Context context,List<Plot> plots) {
-		super(context, R.layout.list_plot);
 		mContext = context;
 		mValues = plots;	
 	}
@@ -26,9 +25,7 @@ public class PlotArrayAdapter extends ArrayAdapter<String>  {
 		ViewHolder holder;
 
 		if (convertView == null) {
-			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context
-							.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.list_plot, parent, false);
+			convertView = LayoutInflater .from(mContext).inflate(R.layout.list_plot, parent, false);
 
 			holder = new ViewHolder ();
 			
@@ -39,13 +36,29 @@ public class PlotArrayAdapter extends ArrayAdapter<String>  {
 			convertView.setTag(holder);
 		} else {
 			// Else re-assign
-			holder = ( ViewHolder ) convertView.getTag();
+			holder = (ViewHolder) convertView.getTag();
 		}
+		Plot p = mValues.get(position);
 
-		holder.plotName.setText(mValues.get(position).getName());
-		holder.plotType.setText(mValues.get(position).getGrowing());
+		holder.plotName.setText(p.getName());
+		holder.plotType.setText(p.getGrowing());
 		
 		return convertView;
+	}
+
+	@Override
+	public int getCount() {
+		return mValues.size();
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		return mValues.get(arg0);
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		return Long.parseLong(mValues.get(arg0).getId());
 	}
 
 

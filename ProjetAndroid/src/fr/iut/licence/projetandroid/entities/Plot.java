@@ -28,7 +28,7 @@ public class Plot implements Serializable
 	@DatabaseField
 	private String				growing;
 	/** The id. */
-	@DatabaseField(id = true)
+	@DatabaseField(generatedId = true,allowGeneratedIdInsert =  true)
 	private String				id;
 	/** The last_growing. */
 	@DatabaseField
