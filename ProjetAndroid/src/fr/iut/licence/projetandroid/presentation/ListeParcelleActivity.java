@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import fr.iut.licence.projetandroid.PlotArrayAdapter;
 import fr.iut.licence.projetandroid.R;
+import fr.iut.licence.projetandroid.entities.Constantes;
 import fr.iut.licence.projetandroid.entities.Plot;
 
 /**
@@ -67,7 +68,7 @@ public class ListeParcelleActivity extends Activity
 
 
 		//------------------------test------------------------
-		PlotArrayAdapter arrayPlot = new PlotArrayAdapter(this, listPlot);
+		PlotArrayAdapter arrayPlot = new PlotArrayAdapter(this, listPlot,Constantes.TYPE_SEMANCE);
 		list.setAdapter(arrayPlot);		
 
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -97,6 +98,8 @@ public class ListeParcelleActivity extends Activity
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
 
+	/* _________________________________________________________ */
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -113,13 +116,22 @@ public class ListeParcelleActivity extends Activity
 		case R.id.menu_ajoutParcelle:
 			intent = new Intent(this, AjoutParcelleActivity.class);
 			startActivity(intent);
+			break;
 		case R.id.menu_convertisseur:
 			intent = new Intent(this, ConvertisseurActivity.class);
 			startActivity(intent);
+			break;
+		case R.id.menu_commande:
+			intent = new Intent(this, CommandeActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.menu_controle:
+			intent = new Intent(this, ControleActivity.class);
+			startActivity(intent);
+			break;
 		default:
 			return super .onOptionsItemSelected(item);
 		}
+		return  true;
 	}
-
-
 }

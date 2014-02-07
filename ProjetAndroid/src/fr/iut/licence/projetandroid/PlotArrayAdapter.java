@@ -8,16 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import fr.iut.licence.projetandroid.entities.Constantes;
 import fr.iut.licence.projetandroid.entities.Plot;
 import fr.iut.licence.projetandroid.entities.ViewHolder;
 
 public class PlotArrayAdapter extends BaseAdapter{
 	private final Context mContext;
 	private final List<Plot> mValues;
+	private int type; 
 	
-	public PlotArrayAdapter(Context context,List<Plot> plots) {
+	public PlotArrayAdapter(Context context,List<Plot> plots, int typeAffich) {
 		mContext = context;
 		mValues = plots;	
+		type = typeAffich;
 	}
 	
 	@Override
@@ -28,10 +31,8 @@ public class PlotArrayAdapter extends BaseAdapter{
 			convertView = LayoutInflater .from(mContext).inflate(R.layout.list_plot, parent, false);
 
 			holder = new ViewHolder ();
-			
 			holder.plotName= (TextView) convertView.findViewById(R.id.tv_plot);
 			holder.plotType = (TextView) convertView.findViewById(R.id.tv_type);
-			
 			//Store the holder with the view.
 			convertView.setTag(holder);
 		} else {
@@ -41,7 +42,17 @@ public class PlotArrayAdapter extends BaseAdapter{
 		Plot p = mValues.get(position);
 
 		holder.plotName.setText(p.getName());
-		holder.plotType.setText(p.getGrowing());
+		switch(type){
+		  case Constantes.TYPE_SURFACE :
+			holder.plotType.setText(String.valueOf(p.getSurface()));
+			break;
+		  case Constantes.TYPE_SEMANCE:
+			holder.plotType.setText(p.getGrowing());
+			break;
+		  default:
+		    holder.plotType.setText(p.getGrowing());break;
+
+		}
 		
 		return convertView;
 	}

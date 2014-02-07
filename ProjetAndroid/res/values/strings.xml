@@ -15,7 +15,7 @@
     <string name="surface_">Surface : </string>
     <string name="cult">infoCult</string>
     <string name="prevcult">infoPrevCult</string>
-    <string name="surface">surface</string>
+    <string name="surface">Surface</string>
     <string name="contr_le">Contrôle</string>
     <string name="commande">Commande</string>
     <string name="convertisseur">Convertisseur</string>
@@ -31,6 +31,20 @@
     <string name="_0">0</string>
     <string name="g">g</string>
     <string name="grains_m2">grains/m2</string>
-    <string name="kg_ha"> Kg/ha</string>
+    <string name="kg_ha">Kg/ha</string>
+    <string name="poids_de_semences_n_cessaires">Poids de semences nécessaires</string>
+    <string name="conditionnement">Conditionnement</string>
+    <string name="nombre_commander">Nombre à commander</string>
+    <string name="ha">ha</string>
+    <string name="kg_sac">Kg/sac</string>
+    <string name="sacs">sacs</string>
+    <string name="image">image</string>
+    <string name="denit_de_semis_">Denité de semis :</string>
+    <string name="ecartement">Ecartement</string>
+    <string name="nombre_de_rangs_m2">Nombre de rangs / m2</string>
+    <string name="nombre_de_grains_m2">Nombre de grains / m2</string>
+    <string name="_rangs_m2">" rangs/m2"</string>
+    <string name="_grains_m2">" grains/m2"</string>
+    <string name="cm">cm</string>
 
 </resources>
