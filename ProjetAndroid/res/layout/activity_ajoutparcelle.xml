@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp" >
+
+        <Spinner
+            android:id="@+id/sp_culturePrec"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/sp_culture"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/sp_culture" />
+
+        <TextView
+            android:id="@+id/tv_infoSuface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/np_surface"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="53dp"
+            android:text="@string/surface_" />
+
+        <TextView
+            android:id="@+id/tv_infoNom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sp_culture"
+            android:layout_alignParentLeft="true"
+            android:text="@string/nom_" />
+
+        <TextView
+            android:id="@+id/tv_infoCulture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/sp_culture"
+            android:layout_alignRight="@+id/tv_infoSuface"
+            android:text="@string/culture_" />
+
+        <TextView
+            android:id="@+id/tv_infoPrecCulture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/sp_culturePrec"
+            android:layout_alignParentLeft="true"
+            android:text="@string/culture_pr_c_dente_" />
+
+        <Spinner
+            android:id="@+id/sp_culture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ed_nom"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ed_nom" />
+
+        <Button
+            android:id="@+id/b_ajouter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="16dp"
+            android:text="@string/ajouter" />
+
+        <TextView
+            android:id="@+id/tv_ajoutParcelle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="19dp"
+            android:layout_toRightOf="@+id/tv_infoCulture"
+            android:gravity="center_horizontal"
+            android:text="@string/ajouter_parcelle"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/ed_nom"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_ajoutParcelle"
+            android:ems="10"
+            android:inputType="text" />
+
+        <NumberPicker
+            android:id="@+id/np_surface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sp_culturePrec"
+            android:layout_toRightOf="@+id/tv_infoPrecCulture"
+            android:width="100dip" />
+
+        <ImageButton
+            android:id="@+id/ib_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ed_adresse"
+            android:layout_toRightOf="@+id/ed_adresse"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/search_map"
+            android:src="@drawable/ic_action_location_found" />
+
+        <TextView
+            android:id="@+id/tv_adresse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv_infoSuface"
+            android:text="@string/adresse" />
+
+        <EditText
+            android:id="@+id/ed_adresse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_infoCulture"
+            android:layout_below="@+id/tv_adresse"
+            android:inputType="text"
+            android:ems="10" />
+
+</RelativeLayout>

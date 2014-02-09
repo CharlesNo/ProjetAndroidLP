@@ -46,5 +46,7 @@
     <string name="_rangs_m2">" rangs/m2"</string>
     <string name="_grains_m2">" grains/m2"</string>
     <string name="cm">cm</string>
+    <string name="adresse">Adresse :</string>
+    <string name="search_map">search map</string>
 
 </resources>

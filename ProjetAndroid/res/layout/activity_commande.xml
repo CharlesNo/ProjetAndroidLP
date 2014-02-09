@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="30dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_commande_nbACommander"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_commande_infoNbACommander"
+        android:layout_alignBottom="@+id/tv_commande_infoNbACommander"
+        android:layout_toRightOf="@+id/tv_commande_conditionnement"
+        android:text="@string/_0" />
+
+    <TextView
+        android:id="@+id/tv_commande_info_nbACommander"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ed_commande_conditionnement"
+        android:layout_marginTop="23dp"
+        android:text="@string/nombre_commander" />
+
+    <TextView
+        android:id="@+id/ed_pdSemNec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/poids_de_semences_n_cessaires" />
+
+    <TextView
+        android:id="@+id/tv_commande_surface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ed_commande_surface"
+        android:layout_toRightOf="@+id/ed_commande_surface"
+        android:text="@string/ha" />
+
+    <EditText
+        android:id="@+id/ed_commande_pdSemNec"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_pdSemNec"
+        android:layout_toRightOf="@+id/tv_comande_surface"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/ed_commande_conditionnement"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ed_commande_surface"
+        android:layout_below="@+id/tv_commande_conditionnement"
+        android:ems="10"
+        android:inputType="number" />
+
+    <ImageButton
+        android:id="@+id/b_commande_infoParcelles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ed_commande_surface"
+        android:layout_toRightOf="@+id/tv_commande_surface"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_action_next_item" />
+
+    <TextView
+        android:id="@+id/tv_commande_pdSemNec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_commande_info_nbACommander"
+        android:layout_alignLeft="@+id/tv_commande_surface"
+        android:text="@string/kg_ha" />
+
+    <TextView
+        android:id="@+id/tv_commande_infoNbACommander"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_commande_info_nbACommander"
+        android:layout_toRightOf="@+id/tv_commande_info_nbACommander"
+        android:text="@string/sacs" />
+
+    <TextView
+        android:id="@+id/tv_comande_surface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ed_commande_pdSemNec"
+        android:text="@string/surface" />
+
+    <EditText
+        android:id="@+id/ed_commande_surface"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ed_commande_pdSemNec"
+        android:layout_below="@+id/tv_comande_surface"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/tv_commande_conditionnement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ed_commande_surface"
+        android:text="@string/conditionnement" />
+
+    <TextView
+        android:id="@string/kg_sac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_comande_surface"
+        android:layout_toRightOf="@+id/ed_commande_pdSemNec"
+        android:text="@string/kg_sac" />
+
+    <Button
+        android:id="@+id/b_commande_ajouter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/contr_le"
+        android:visibility="gone" />
+
+</RelativeLayout>

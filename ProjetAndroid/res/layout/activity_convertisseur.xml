@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="20dp" >
+
+    <Button
+        android:id="@+id/b_convertisseur_commande"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/commande" />
+
+    <TextView
+        android:id="@+id/tv_infoDensiteSemi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ed_densiteSemi"
+        android:layout_toRightOf="@+id/ed_densiteSemi"
+        android:text="@string/grains_m2" />
+
+    <TextView
+        android:id="@+id/tv_PGM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/pgm_" />
+
+    <TextView
+        android:id="@+id/tv_infoPGM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ed_PGM"
+        android:layout_toRightOf="@+id/ed_PGM"
+        android:text="@string/g" />
+
+    <TextView
+        android:id="@+id/tv_densiteSemi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ed_PGM"
+        android:layout_marginTop="18dp"
+        android:text="@string/densit_de_semis_" />
+
+    <TextView
+        android:id="@+id/tv_poidSemence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ed_densiteSemi"
+        android:layout_marginTop="31dp"
+        android:text="@string/poids_de_semences_c_cessaire_" />
+
+    <TextView
+        android:id="@+id/tv_resultInfoPoidSemence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_resultPoidSemence"
+        android:layout_alignBottom="@+id/tv_resultPoidSemence"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/tv_resultPoidSemence"
+        android:text="@string/kg_ha" />
+
+    <TextView
+        android:id="@+id/tv_resultPoidSemence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_poidSemence"
+        android:layout_centerHorizontal="true"
+        android:text="@string/_0" />
+
+    <EditText
+        android:id="@+id/ed_PGM"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_PGM"
+        android:layout_toLeftOf="@+id/tv_resultPoidSemence"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/ed_densiteSemi"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ed_PGM"
+        android:layout_below="@+id/tv_densiteSemi"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_info_densite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/denit_de_semis_" />
+
+    <TextView
+        android:id="@+id/tv_info_ecartement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_info_densite"
+        android:layout_below="@+id/tv_info_densite"
+        android:layout_marginTop="47dp"
+        android:text="@string/ecartement" />
+
+    <TextView
+        android:id="@+id/tv_info_nbGrains"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_info_nbRangs"
+        android:layout_alignTop="@+id/tv_info_nbRangs"
+        android:layout_marginTop="58dp"
+        android:text="@string/nombre_de_grains_m2" />
+
+    <TextView
+        android:id="@+id/tv_controle_nbGrains"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_controle_nbRangs"
+        android:layout_below="@+id/tv_info_nbGrains"
+        android:text="@string/_0" />
+
+    <TextView
+        android:id="@+id/tv_controle_nbRangs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_info_nbRangs"
+        android:layout_marginTop="28dp"
+        android:layout_toLeftOf="@+id/textView7"
+        android:text="@string/_0" />
+
+    <EditText
+        android:id="@+id/ed_controle_ecartement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ed_controle_densite"
+        android:layout_below="@+id/tv_info_ecartement"
+        android:ems="10"
+        android:inputType="number" >
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_controle_nbRangs"
+        android:layout_alignBottom="@+id/tv_controle_nbRangs"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/tv_info_nbGrains"
+        android:text="@string/_rangs_m2" />
+
+    <EditText
+        android:id="@+id/ed_controle_densite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_info_densite"
+        android:layout_below="@+id/tv_info_densite"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ed_controle_densite"
+        android:layout_toRightOf="@+id/ed_controle_densite"
+        android:text="@string/grains_m2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ed_controle_ecartement"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="@string/cm" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_controle_nbGrains"
+        android:layout_alignBottom="@+id/tv_controle_nbGrains"
+        android:layout_alignLeft="@+id/textView7"
+        android:text="@string/_grains_m2" />
+
+    <TextView
+        android:id="@+id/tv_info_nbRangs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ed_controle_ecartement"
+        android:layout_marginTop="52dp"
+        android:text="@string/nombre_de_rangs_m2" />
+
+</RelativeLayout>
