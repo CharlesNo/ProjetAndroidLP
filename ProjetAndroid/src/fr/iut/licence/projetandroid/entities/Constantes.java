@@ -1,7 +1,12 @@
 package fr.iut.licence.projetandroid.entities;
 
-public class Constantes {
-
-	public static final int TYPE_SURFACE = 1;
-	public static final int TYPE_SEMANCE = 0;
+/**
+ * The Class Constantes.
+ */
+public class Constantes
+{
+	/** The Constant TYPE_SURFACE. */
+	public static final int	TYPE_SURFACE	= 1;
+	/** The Constant TYPE_SEMANCE. */
+	public static final int	TYPE_SEMANCE	= 0;
 }

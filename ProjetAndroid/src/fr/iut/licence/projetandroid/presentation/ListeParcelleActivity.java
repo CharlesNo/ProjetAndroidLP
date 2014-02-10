@@ -2,7 +2,6 @@ package fr.iut.licence.projetandroid.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -23,12 +22,12 @@ import fr.iut.licence.projetandroid.entities.Plot;
 /**
  * The Class MainActivity.
  */
-
 public class ListeParcelleActivity extends Activity
 {
 	/** The list plot. */
 	private List<Plot>	listPlot;
-	private Context mContext;
+	/** The m context. */
+	private Context		mContext;
 
 	/* _________________________________________________________ */
 	/**
@@ -41,41 +40,52 @@ public class ListeParcelleActivity extends Activity
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);		
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listeparcelle);
 		mContext = this;
-		ListView list = (ListView) findViewById(R.id.liste);
-
-		//TODO get plots for DB.
-		//------------------------test------------------------
+		final ListView list = (ListView) findViewById(R.id.liste);
+		// TODO get plots for DB.
+		// ------------------------test------------------------
 		listPlot = new ArrayList<Plot>();
-		Plot plot = new Plot();
+		final Plot plot = new Plot();
 		plot.setGrowing("blé");
-		plot.setId("0");
+		plot.setId(0L);
 		plot.setLast_growing("maïs");
 		plot.setName("ici");
 		plot.setSurface(150);
-
-		Plot plot1 = new Plot();
+		final Plot plot1 = new Plot();
 		plot1.setGrowing("blé");
-		plot1.setId("0");
+		plot1.setId(0L);
 		plot1.setLast_growing("maïs");
 		plot1.setName("ici");
 		plot1.setSurface(150);
-
 		listPlot.add(plot);
 		listPlot.add(plot1);
-
-
-		//------------------------test------------------------
-		PlotArrayAdapter arrayPlot = new PlotArrayAdapter(this, listPlot,Constantes.TYPE_SEMANCE);
-		list.setAdapter(arrayPlot);		
-
-		list.setOnItemClickListener(new OnItemClickListener() {
-
+		// ------------------------test------------------------
+		final PlotArrayAdapter arrayPlot = new PlotArrayAdapter(this, listPlot,
+				Constantes.TYPE_SEMANCE);
+		list.setAdapter(arrayPlot);
+		list.setOnItemClickListener(new OnItemClickListener()
+		{
+			/* _________________________________________________________ */
+			/**
+			 * On item click.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param view
+			 *            the view
+			 * @param position
+			 *            the position
+			 * @param id
+			 *            the id
+			 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
+			 *      android.view.View, int, long)
+			 */
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int position,
-					long id) {
+			public void onItemClick(final AdapterView<?> arg0, final View view,
+					final int position, final long id)
+			{
 				final Bundle bundle = new Bundle();
 				bundle.putSerializable("plot", listPlot.get(position));
 				final Intent intent = new Intent(mContext, PlotActivty.class);
@@ -83,8 +93,7 @@ public class ListeParcelleActivity extends Activity
 				startActivity(intent);
 			}
 		});
-
-		ActionBar ac = getActionBar();
+		final ActionBar ac = getActionBar();
 		ac.show();
 	}
 
@@ -97,41 +106,50 @@ public class ListeParcelleActivity extends Activity
 	 * @return true, if successful
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
-
 	/* _________________________________________________________ */
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+	public boolean onCreateOptionsMenu(final Menu menu)
+	{
+		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	/* _________________________________________________________ */
-	
+	/* _________________________________________________________ */
+	/**
+	 * On options item selected.
+	 * 
+	 * @param item
+	 *            the item
+	 * @return true, if successful
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(final MenuItem item)
+	{
 		Intent intent;
-		switch (item.getItemId()) {
-		case R.id.menu_ajoutParcelle:
-			intent = new Intent(this, AjoutParcelleActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.menu_convertisseur:
-			intent = new Intent(this, ConvertisseurActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.menu_commande:
-			intent = new Intent(this, CommandeActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.menu_controle:
-			intent = new Intent(this, ControleActivity.class);
-			startActivity(intent);
-			break;
-		default:
-			return super .onOptionsItemSelected(item);
+		switch (item.getItemId())
+		{
+			case R.id.menu_ajoutParcelle:
+				intent = new Intent(this, AjoutParcelleActivity.class);
+				startActivity(intent);
+				break;
+			case R.id.menu_convertisseur:
+				intent = new Intent(this, ConvertisseurActivity.class);
+				startActivity(intent);
+				break;
+			case R.id.menu_commande:
+				intent = new Intent(this, CommandeActivity.class);
+				startActivity(intent);
+				break;
+			case R.id.menu_controle:
+				intent = new Intent(this, ControleActivity.class);
+				startActivity(intent);
+				break;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return  true;
+		return true;
 	}
 }

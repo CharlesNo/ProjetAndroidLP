@@ -18,69 +18,138 @@ import android.widget.TextView;
 import android.widget.Toast;
 import fr.iut.licence.projetandroid.R;
 
-public class ConvertisseurActivity extends Activity implements OnClickListener{
+/**
+ * The Class ConvertisseurActivity.
+ */
+public class ConvertisseurActivity extends Activity implements OnClickListener
+{
+	/** The m densité. */
+	private EditText	mDensité;
+	/** The m pgm. */
+	private EditText	mPGM;
+	/** The m result. */
+	private TextView	mResult;
+	/** The m button commande. */
+	private Button		mButtonCommande;
+	/** The m context. */
+	private Context		mContext;
 
-	private EditText mDensité ;
-	private EditText mPGM;
-	private TextView mResult;
-	private Button mButtonCommande;
-	private Context mContext;
-	
+	/* _________________________________________________________ */
+	/**
+	 * On create.
+	 * 
+	 * @param savedInstanceState
+	 *            the saved instance state
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
-		ActionBar actionBar = getActionBar();
+		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Convertisseur");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_convertisseur);
-
 		mContext = this;
 		mDensité = (EditText) findViewById(R.id.ed_densiteSemi);
 		mPGM = (EditText) findViewById(R.id.ed_PGM);
 		mResult = (TextView) findViewById(R.id.tv_resultPoidSemence);
-		
 		mButtonCommande = (Button) findViewById(R.id.b_convertisseur_commande);
 		mButtonCommande.setOnClickListener(this);
-		
-		TextWatcher tw = new TextWatcher(){
+		final TextWatcher tw = new TextWatcher()
+		{
+			/* _________________________________________________________ */
+			/**
+			 * Before text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
 			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {
+			public void beforeTextChanged(final CharSequence arg0,
+					final int arg1, final int arg2, final int arg3)
+			{
 			}
 
+			/* _________________________________________________________ */
+			/**
+			 * On text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
 			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {				
+			public void onTextChanged(final CharSequence arg0, final int arg1,
+					final int arg2, final int arg3)
+			{
 			}
 
+			/* _________________________________________________________ */
+			/**
+			 * After text changed.
+			 * 
+			 * @param s
+			 *            the s
+			 * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
+			 */
 			@Override
-			public void afterTextChanged(Editable s) {
+			public void afterTextChanged(final Editable s)
+			{
 				long i = 0;
-				long j =0;
-				int result =0;
-				try{
-				if(!mDensité.getText().toString().equals(""))
-					{i = Integer.valueOf(mDensité.getText().toString()); ++result;}
-				if(!mPGM.getText().toString().equals(""))
-					{j = Integer.valueOf(mPGM.getText().toString()); ++result;}
+				long j = 0;
+				int result = 0;
+				try
+				{
+					if (!mDensité.getText().toString().equals(""))
+					{
+						i = Integer.valueOf(mDensité.getText().toString());
+						++result;
+					}
+					if (!mPGM.getText().toString().equals(""))
+					{
+						j = Integer.valueOf(mPGM.getText().toString());
+						++result;
+					}
 				}
-				catch(NumberFormatException ex){
-					i=0;
-					j=0;
+				catch (final NumberFormatException ex)
+				{
+					i = 0;
+					j = 0;
 					mButtonCommande.setVisibility(View.GONE);
-					Toast.makeText(mContext, "donne incalculable", Toast.LENGTH_SHORT).show();
+					Toast.makeText(mContext, "donne incalculable",
+							Toast.LENGTH_SHORT).show();
 				}
-				if(result == 2)
+				if (result == 2)
+				{
 					mButtonCommande.setVisibility(View.VISIBLE);
-				else 
+				}
+				else
+				{
 					mButtonCommande.setVisibility(View.GONE);
+				}
 				mResult.setText(String.valueOf(i * j));
 			}
-	    };
-		mDensité.addTextChangedListener(tw); 
+		};
+		mDensité.addTextChangedListener(tw);
 		mPGM.addTextChangedListener(tw);
 	}
-	
+
 	/* _________________________________________________________ */
 	/**
 	 * On create options menu.
@@ -90,51 +159,71 @@ public class ConvertisseurActivity extends Activity implements OnClickListener{
 	 * @return true, if successful
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
-
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+	public boolean onCreateOptionsMenu(final Menu menu)
+	{
+		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	/* _________________________________________________________ */
 
+	/* _________________________________________________________ */
+	/* _________________________________________________________ */
+	/**
+	 * On options item selected.
+	 * 
+	 * @param item
+	 *            the item
+	 * @return true, if successful
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(final MenuItem item)
+	{
 		Intent intent;
-		switch (item.getItemId()) {
-		case android.R.id.home :
-			finish();
-			break;
-		case R.id.menu_ajoutParcelle:
-			intent = new Intent(this, AjoutParcelleActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.menu_convertisseur:
-			break;
-		case R.id.menu_commande:
-			intent = new Intent(this, CommandeActivity.class);
-			startActivity(intent);
-			finish();
-			break;
-		case R.id.menu_controle:
-			intent = new Intent(this, ControleActivity.class);
-			startActivity(intent);
-			finish();
-			break;
-		default:
-			return super .onOptionsItemSelected(item);
+		switch (item.getItemId())
+		{
+			case android.R.id.home:
+				finish();
+				break;
+			case R.id.menu_ajoutParcelle:
+				intent = new Intent(this, AjoutParcelleActivity.class);
+				startActivity(intent);
+				break;
+			case R.id.menu_convertisseur:
+				break;
+			case R.id.menu_commande:
+				intent = new Intent(this, CommandeActivity.class);
+				startActivity(intent);
+				finish();
+				break;
+			case R.id.menu_controle:
+				intent = new Intent(this, ControleActivity.class);
+				startActivity(intent);
+				finish();
+				break;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return  true;
+		return true;
 	}
 
+	/* _________________________________________________________ */
+	/**
+	 * On click.
+	 * 
+	 * @param v
+	 *            the v
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
-	public void onClick(View v) {
-		if(v.getId()==R.id.b_convertisseur_commande){
-			Intent intent = new Intent(this,CommandeActivity.class);
-			intent.putExtra("pdtSemence",mResult.getText().toString());
-			intent.putExtra("densiteSemi",mDensité.getText().toString());
+	public void onClick(final View v)
+	{
+		if (v.getId() == R.id.b_convertisseur_commande)
+		{
+			final Intent intent = new Intent(this, CommandeActivity.class);
+			intent.putExtra("pdtSemence", mResult.getText().toString());
+			intent.putExtra("densiteSemi", mDensité.getText().toString());
 			startActivity(intent);
 		}
 	}

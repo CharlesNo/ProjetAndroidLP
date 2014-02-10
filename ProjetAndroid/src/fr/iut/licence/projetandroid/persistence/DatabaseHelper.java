@@ -28,7 +28,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
 	/** The Constant DATABASE_NAME. */
 	private static final String		DATABASE_NAME		= "DATABASE_ANDROID_PROJECT";
 	/** The Constant DATABASE_VERSION. */
-	private static final int		DATABASE_VERSION	= 0;
+	private static final int		DATABASE_VERSION	= 1;
 	/** The instance. */
 	private static DatabaseHelper	instance;
 

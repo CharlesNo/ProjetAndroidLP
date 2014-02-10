@@ -1,5 +1,8 @@
 package fr.iut.licence.projetandroid;
 
-public class PlotInfoActivity {
-
+/**
+ * The Class PlotInfoActivity.
+ */
+public class PlotInfoActivity
+{
 }

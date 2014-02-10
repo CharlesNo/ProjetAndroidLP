@@ -10,6 +10,7 @@
 package fr.iut.licence.projetandroid.entities;
 
 import java.io.Serializable;
+import java.net.URL;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -24,15 +25,27 @@ public class Plot implements Serializable
 {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -6091604027434736676L;
+	/** The adresse. */
+	@DatabaseField
+	private String				adresse;
 	/** The growing. */
 	@DatabaseField
 	private String				growing;
 	/** The id. */
-	@DatabaseField(generatedId = true,allowGeneratedIdInsert =  true)
-	private String				id;
+	@DatabaseField(generatedId = true, allowGeneratedIdInsert = true)
+	private Long				id;
+	/** The image. */
+	@DatabaseField
+	private URL					image;
 	/** The last_growing. */
 	@DatabaseField
 	private String				last_growing;
+	/** The latitude. */
+	@DatabaseField
+	private Double				latitude;
+	/** The longitude. */
+	@DatabaseField
+	private Double				longitude;
 	/** The name. */
 	@DatabaseField
 	private String				name;
@@ -48,117 +61,191 @@ public class Plot implements Serializable
 	{
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Retourne la valeur du champ growing.
+	 * Gets the adresse.
 	 * 
-	 * @return la valeur du champ growing.
+	 * @return the adresse
 	 */
-	public final String getGrowing()
+	public String getAdresse()
+	{
+		return adresse;
+	}
+
+	/**
+	 * Gets the growing.
+	 * 
+	 * @return the growing
+	 */
+	public String getGrowing()
 	{
 		return growing;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Retourne la valeur du champ id.
+	 * Gets the id.
 	 * 
-	 * @return la valeur du champ id.
+	 * @return the id
 	 */
-	public final String getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Retourne la valeur du champ last_growing.
+	 * Gets the image.
 	 * 
-	 * @return la valeur du champ last_growing.
+	 * @return the image
 	 */
-	public final String getLast_growing()
+	public URL getImage()
+	{
+		return image;
+	}
+
+	/**
+	 * Gets the last_growing.
+	 * 
+	 * @return the last_growing
+	 */
+	public String getLast_growing()
 	{
 		return last_growing;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Retourne la valeur du champ name.
+	 * Gets the latitude.
 	 * 
-	 * @return la valeur du champ name.
+	 * @return the latitude
 	 */
-	public final String getName()
+	public Double getLatitude()
+	{
+		return latitude;
+	}
+
+	/**
+	 * Gets the longitude.
+	 * 
+	 * @return the longitude
+	 */
+	public Double getLongitude()
+	{
+		return longitude;
+	}
+
+	/**
+	 * Gets the name.
+	 * 
+	 * @return the name
+	 */
+	public String getName()
 	{
 		return name;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Retourne la valeur du champ surface.
+	 * Gets the surface.
 	 * 
-	 * @return la valeur du champ surface.
+	 * @return the surface
 	 */
-	public final int getSurface()
+	public int getSurface()
 	{
 		return surface;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Modifie la valeur du cmap growing.
+	 * Sets the adresse.
+	 * 
+	 * @param adresse
+	 *            the new adresse
+	 */
+	public void setAdresse(final String adresse)
+	{
+		this.adresse = adresse;
+	}
+
+	/**
+	 * Sets the growing.
 	 * 
 	 * @param growing
-	 *            la valeur à placer dans le champ growing.
+	 *            the new growing
 	 */
-	public final void setGrowing(final String growing)
+	public void setGrowing(final String growing)
 	{
 		this.growing = growing;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Modifie la valeur du cmap id.
+	 * Sets the id.
 	 * 
 	 * @param id
-	 *            la valeur à placer dans le champ id.
+	 *            the new id
 	 */
-	public final void setId(final String id)
+	public void setId(final Long id)
 	{
 		this.id = id;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Modifie la valeur du cmap last_growing.
+	 * Sets the image.
+	 * 
+	 * @param image
+	 *            the new image
+	 */
+	public void setImage(final URL image)
+	{
+		this.image = image;
+	}
+
+	/**
+	 * Sets the last_growing.
 	 * 
 	 * @param last_growing
-	 *            la valeur à placer dans le champ last_growing.
+	 *            the new last_growing
 	 */
-	public final void setLast_growing(final String last_growing)
+	public void setLast_growing(final String last_growing)
 	{
 		this.last_growing = last_growing;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Modifie la valeur du cmap name.
+	 * Sets the latitude.
+	 * 
+	 * @param latitude
+	 *            the new latitude
+	 */
+	public void setLatitude(final Double latitude)
+	{
+		this.latitude = latitude;
+	}
+
+	/**
+	 * Sets the longitude.
+	 * 
+	 * @param longitude
+	 *            the new longitude
+	 */
+	public void setLongitude(final Double longitude)
+	{
+		this.longitude = longitude;
+	}
+
+	/**
+	 * Sets the name.
 	 * 
 	 * @param name
-	 *            la valeur à placer dans le champ name.
+	 *            the new name
 	 */
-	public final void setName(final String name)
+	public void setName(final String name)
 	{
 		this.name = name;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Modifie la valeur du cmap surface.
+	 * Sets the surface.
 	 * 
 	 * @param surface
-	 *            la valeur à placer dans le champ surface.
+	 *            the new surface
 	 */
-	public final void setSurface(final int surface)
+	public void setSurface(final int surface)
 	{
 		this.surface = surface;
 	}

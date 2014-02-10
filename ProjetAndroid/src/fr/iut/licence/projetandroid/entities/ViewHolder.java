@@ -2,7 +2,13 @@ package fr.iut.licence.projetandroid.entities;
 
 import android.widget.TextView;
 
-public class ViewHolder {
-	public TextView plotName;
-	public TextView  plotType;
+/**
+ * The Class ViewHolder.
+ */
+public class ViewHolder
+{
+	/** The plot name. */
+	public TextView	plotName;
+	/** The plot type. */
+	public TextView	plotType;
 }
