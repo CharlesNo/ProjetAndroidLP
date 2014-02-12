@@ -3,6 +3,7 @@ package fr.iut.licence.projetandroid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,6 +21,8 @@ public class ReverseGeocodingTask extends AsyncTask<String, String, String>
 	private final Location				mlocation;
 	/** The m listener. */
 	private final TaskFinishedListener	mListener;
+	
+	List<Address> addrs = null;
 
 	/**
 	 * Instantiates a new reverse geocoding task.
@@ -54,7 +57,6 @@ public class ReverseGeocodingTask extends AsyncTask<String, String, String>
 	{
 		final Geocoder geo = new Geocoder(mContext, Locale.getDefault());
 		final Location loc = mlocation;
-		List<Address> addrs = null;
 		try
 		{
 			// geocoding
@@ -62,29 +64,37 @@ public class ReverseGeocodingTask extends AsyncTask<String, String, String>
 			{
 				if (arg0.length != 0)
 				{
-					addrs = geo.getFromLocationName(arg0[0], 1);
 					// reverse Geocoding
+					addrs = geo.getFromLocationName(arg0[0], 1);
 				}
+				else
+				{
+					addrs = geo.getFromLocation(loc.getAltitude(),
+							loc.getLongitude(), 1);
+				}  
 			}
-			else
-			{
-				addrs = geo.getFromLocation(loc.getAltitude(),
-						loc.getLongitude(), 1);
-			}
+			
 		}
 		catch (final IOException e)
 		{
 			e.printStackTrace();
 		}
+
+
+		return "";
+	}
+	@Override
+	protected void onPostExecute(String result) {
+		// on trouve une adresse
 		if ((addrs != null) && (addrs.size() > 0))
 		{
 			final Address address = addrs.get(0);
 			mListener.onTaskCompleted(address);
 		}
+		// sinon
 		else
 		{
 			mListener.onTaskCompleted(null);
 		}
-		return "";
 	}
 }

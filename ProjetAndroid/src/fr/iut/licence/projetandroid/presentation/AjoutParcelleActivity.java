@@ -7,7 +7,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -27,7 +28,7 @@ import fr.iut.licence.projetandroid.persistence.DaoUtils;
  * The Class AjoutParcelleActivity.
  */
 public class AjoutParcelleActivity extends Activity implements OnClickListener,
-		LocationListener, TaskFinishedListener
+LocationListener, TaskFinishedListener
 {
 	/** The m spinner. */
 	private Spinner			mSpinner;
@@ -45,6 +46,7 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 	/** The m location. */
 	private Location		mLocation;
 
+	private boolean mSaved = false;;
 	/* _________________________________________________________ */
 	/**
 	 * On create.
@@ -57,10 +59,16 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 	protected void onCreate(final Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+
 		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle("Ajout Parcelle");
 		actionBar.setDisplayHomeAsUpEnabled(true);
+
 		setContentView(R.layout.activity_ajoutparcelle);
+		loadComponent();
+	}
+
+	private void loadComponent() {
 		mName = (EditText) findViewById(R.id.ed_nom);
 		mSurface = (NumberPicker) findViewById(R.id.np_surface);
 		mSpinner = (Spinner) findViewById(R.id.sp_culture);
@@ -78,7 +86,7 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 		b_ajouter.setOnClickListener(this);
 		final ImageButton b_map = (ImageButton) findViewById(R.id.ib_map);
 		b_map.setOnClickListener(this);
-		mLocation = new Location("prvider");
+		mLocation = new Location("provider");
 	}
 
 	/* _________________________________________________________ */
@@ -93,45 +101,54 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 	public void onClick(final View v)
 	{
 		switch (v.getId())
-		{
-			case R.id.b_ajouter:
-				if (mAdresse.getText().toString().equals(""))
-				{
-					Toast.makeText(this, "Adresse non renseignée",
-							Toast.LENGTH_SHORT).show();
-				}
-				else
-				{
-					final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
-							this, this, mLocation);
-					reverseGeocodingTask.execute(mAdresse.getText().toString());
-				}
-				if ((mLocation.getLatitude() != 0)
-						&& (mLocation.getLongitude() != 0))
-				{
-					savePlot();
-				}
-				break;
-			case R.id.ib_map:
-				mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-				if (mLocationManager
-						.isProviderEnabled(LocationManager.GPS_PROVIDER))
-				{
-					mLocationManager.requestLocationUpdates(
-							LocationManager.GPS_PROVIDER, 3000, 0, this);
-					final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
-							this, this, mLocation);
-					reverseGeocodingTask.execute();
-				}
-				else
-				{
-					Toast.makeText(this, "GPS non disponible.",
-							Toast.LENGTH_SHORT).show();
-				}
-				break;
-			default:
-				break;
+		{   
+		case R.id.b_ajouter:
+			if (mAdresse.getText().toString().equals(""))
+			{
+				Toast.makeText(this, "Adresse non renseignée",
+						Toast.LENGTH_SHORT).show();
+			}
+			else
+			{
+				final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
+						this, this, mLocation);
+				mSaved = true;
+				reverseGeocodingTask.execute(mAdresse.getText().toString());
+			}			
+
+			break;
+		case R.id.ib_map:
+			mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+			if (mLocationManager
+					.isProviderEnabled(LocationManager.GPS_PROVIDER))
+			{
+				mLocationManager.requestLocationUpdates(
+						LocationManager.GPS_PROVIDER, 3000, 0, this);
+				final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
+						this, this, mLocation);
+				reverseGeocodingTask.execute();
+			}
+			else
+			{
+				Toast.makeText(this, "GPS non disponible.",
+						Toast.LENGTH_SHORT).show();
+			}
+			break;
+		default:
+			break;
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	/**
@@ -150,19 +167,6 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 
 	/* _________________________________________________________ */
 	/**
-	 * On pause.
-	 * 
-	 * @see android.app.Activity#onPause()
-	 */
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-		mLocationManager.removeUpdates(this);
-	}
-
-	/* _________________________________________________________ */
-	/**
 	 * On location changed.
 	 * 
 	 * @param location
@@ -176,13 +180,17 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 		{
 			mLocation.setLatitude(location.getLatitude());
 			mLocation.setLongitude(location.getLongitude());
+			Log.i("loc",String.valueOf(location.getLatitude()));
 		}
 		else
 		{
 			Toast.makeText(this, "Location non définie.", Toast.LENGTH_SHORT)
-					.show();
+			.show();
 		}
+		if( mLocationManager!= null)
+			mLocationManager.removeUpdates(this);
 	}
+
 
 	/* _________________________________________________________ */
 	/**
@@ -244,15 +252,14 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 		{
 			mAdresse.setText(String.format("%s, %s, %s", adresse
 					.getMaxAddressLineIndex() > 0 ? adresse.getAddressLine(0)
-					: " ", adresse.getLocality(), adresse.getCountryName()));
+							: " ", adresse.getLocality(), adresse.getCountryName()));
 			mLocation.setLatitude(adresse.getLatitude());
 			mLocation.setLongitude(adresse.getLongitude());
 		}
-		else
-		{
-			Looper.prepare();
-			Toast.makeText(this, "Echec lors du chargement de l'adresse",
-					Toast.LENGTH_SHORT).show();
-		}
+		if(mSaved)
+			if ((mLocation.getLatitude() != 0)
+					&& (mLocation.getLongitude() != 0))
+				savePlot();
+		mSaved = false;
 	}
 }

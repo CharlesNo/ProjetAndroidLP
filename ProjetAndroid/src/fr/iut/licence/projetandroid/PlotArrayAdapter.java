@@ -1,6 +1,7 @@
 package fr.iut.licence.projetandroid;
 
 import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,9 @@ public class PlotArrayAdapter extends BaseAdapter
 	/** The m context. */
 	private final Context		mContext;
 	/** The m values. */
-	private final List<Plot>	mValues;
+	private List<Plot>	mValues;
+
+
 	/** The type. */
 	private final int			type;
 
@@ -79,15 +82,15 @@ public class PlotArrayAdapter extends BaseAdapter
 		holder.plotName.setText(p.getName());
 		switch (type)
 		{
-			case Constantes.TYPE_SURFACE:
-				holder.plotType.setText(String.valueOf(p.getSurface()));
-				break;
-			case Constantes.TYPE_SEMANCE:
-				holder.plotType.setText(p.getGrowing());
-				break;
-			default:
-				holder.plotType.setText(p.getGrowing());
-				break;
+		case Constantes.TYPE_SURFACE:
+			holder.plotType.setText(String.valueOf(p.getSurface()));
+			break;
+		case Constantes.TYPE_SEMANCE:
+			holder.plotType.setText(p.getGrowing());
+			break;
+		default:
+			holder.plotType.setText(p.getGrowing());
+			break;
 		}
 		return convertView;
 	}
@@ -133,5 +136,24 @@ public class PlotArrayAdapter extends BaseAdapter
 	public long getItemId(final int arg0)
 	{
 		return mValues.get(arg0).getId();
+	}
+
+	public List<Plot> getListPlot() {
+		return mValues;
+	}
+
+	public void setListPlot(List<Plot> list ){
+		mValues = list;
+		notifyDataSetChanged();
+	}
+	public boolean remove(Object object) {
+		mValues.remove(object);
+		notifyDataSetChanged();
+		return true;
+	}
+
+	public void addPlot(Plot plot) {
+		mValues.add(plot);
+		notifyDataSetChanged();
 	}
 }

@@ -1,7 +1,7 @@
 package fr.iut.licence.projetandroid.presentation;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -18,16 +18,16 @@ import fr.iut.licence.projetandroid.PlotArrayAdapter;
 import fr.iut.licence.projetandroid.R;
 import fr.iut.licence.projetandroid.entities.Constantes;
 import fr.iut.licence.projetandroid.entities.Plot;
+import fr.iut.licence.projetandroid.persistence.DaoUtils;
 
 /**
  * The Class MainActivity.
  */
 public class ListeParcelleActivity extends Activity
 {
-	/** The list plot. */
-	private List<Plot>	listPlot;
 	/** The m context. */
 	private Context		mContext;
+	private PlotArrayAdapter mArrayPlot;
 
 	/* _________________________________________________________ */
 	/**
@@ -44,27 +44,9 @@ public class ListeParcelleActivity extends Activity
 		setContentView(R.layout.activity_listeparcelle);
 		mContext = this;
 		final ListView list = (ListView) findViewById(R.id.liste);
-		// TODO get plots for DB.
-		// ------------------------test------------------------
-		listPlot = new ArrayList<Plot>();
-		final Plot plot = new Plot();
-		plot.setGrowing("blé");
-		plot.setId(0L);
-		plot.setLast_growing("maïs");
-		plot.setName("ici");
-		plot.setSurface(150);
-		final Plot plot1 = new Plot();
-		plot1.setGrowing("blé");
-		plot1.setId(0L);
-		plot1.setLast_growing("maïs");
-		plot1.setName("ici");
-		plot1.setSurface(150);
-		listPlot.add(plot);
-		listPlot.add(plot1);
-		// ------------------------test------------------------
-		final PlotArrayAdapter arrayPlot = new PlotArrayAdapter(this, listPlot,
+		mArrayPlot = new PlotArrayAdapter(this,(List<Plot>) DaoUtils.getAllData(this, Plot.class),
 				Constantes.TYPE_SEMANCE);
-		list.setAdapter(arrayPlot);
+		list.setAdapter(mArrayPlot);
 		list.setOnItemClickListener(new OnItemClickListener()
 		{
 			/* _________________________________________________________ */
@@ -87,7 +69,7 @@ public class ListeParcelleActivity extends Activity
 					final int position, final long id)
 			{
 				final Bundle bundle = new Bundle();
-				bundle.putSerializable("plot", listPlot.get(position));
+				bundle.putSerializable("plot", mArrayPlot.getListPlot().get(position));
 				final Intent intent = new Intent(mContext, PlotActivty.class);
 				intent.putExtra("bundle", bundle);
 				startActivity(intent);
@@ -97,6 +79,10 @@ public class ListeParcelleActivity extends Activity
 		ac.show();
 	}
 
+	public void addPlot(Plot plot){
+		mArrayPlot.addPlot(plot);
+	}
+	
 	/* _________________________________________________________ */
 	/**
 	 * On create options menu.
@@ -151,5 +137,11 @@ public class ListeParcelleActivity extends Activity
 				return super.onOptionsItemSelected(item);
 		}
 		return true;
+	}
+	
+	@Override
+	protected void onResume() {
+		mArrayPlot.setListPlot((List<Plot>) DaoUtils.getAllData(this, Plot.class));
+		super.onResume();
 	}
 }

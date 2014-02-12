@@ -57,6 +57,7 @@ public class DaoUtils
 		}
 		catch (final SQLException e)
 		{
+			e.printStackTrace();
 		}
 		finally
 		{

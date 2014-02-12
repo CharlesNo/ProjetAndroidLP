@@ -36,7 +36,7 @@ public class Plot implements Serializable
 	private Long				id;
 	/** The image. */
 	@DatabaseField
-	private URL					image;
+	private String				image;
 	/** The last_growing. */
 	@DatabaseField
 	private String				last_growing;
@@ -96,7 +96,7 @@ public class Plot implements Serializable
 	 * 
 	 * @return the image
 	 */
-	public URL getImage()
+	public String getImage()
 	{
 		return image;
 	}
@@ -190,7 +190,7 @@ public class Plot implements Serializable
 	 * @param image
 	 *            the new image
 	 */
-	public void setImage(final URL image)
+	public void setImage(final String image)
 	{
 		this.image = image;
 	}
