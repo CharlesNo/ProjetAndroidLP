@@ -7,7 +7,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -103,13 +102,21 @@ LocationListener, TaskFinishedListener
 		switch (v.getId())
 		{   
 		case R.id.b_ajouter:
-			if (mAdresse.getText().toString().equals(""))
+			Button b_ajouter = (Button) findViewById(R.id.b_ajouter);
+			
+			if (mName.getText().toString().equals("") )
+			{
+				Toast.makeText(this, "Nom non renseignée",
+						Toast.LENGTH_SHORT).show();
+			}
+			else if (mAdresse.getText().toString().equals(""))
 			{
 				Toast.makeText(this, "Adresse non renseignée",
 						Toast.LENGTH_SHORT).show();
 			}
 			else
 			{
+				b_ajouter.setEnabled(false);
 				final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
 						this, this, mLocation);
 				mSaved = true;
@@ -124,9 +131,6 @@ LocationListener, TaskFinishedListener
 			{
 				mLocationManager.requestLocationUpdates(
 						LocationManager.GPS_PROVIDER, 3000, 0, this);
-				final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
-						this, this, mLocation);
-				reverseGeocodingTask.execute();
 			}
 			else
 			{
@@ -163,6 +167,7 @@ LocationListener, TaskFinishedListener
 		plot.setLast_growing(mSpinnerPrec.getSelectedItem().toString());
 		DaoUtils.storeSingleData(this, plot);
 		Toast.makeText(this, "Parcelle ajoutée", Toast.LENGTH_SHORT).show();
+		finish();
 	}
 
 	/* _________________________________________________________ */
@@ -180,7 +185,9 @@ LocationListener, TaskFinishedListener
 		{
 			mLocation.setLatitude(location.getLatitude());
 			mLocation.setLongitude(location.getLongitude());
-			Log.i("loc",String.valueOf(location.getLatitude()));
+			final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
+					this, this, mLocation);
+			reverseGeocodingTask.execute();
 		}
 		else
 		{

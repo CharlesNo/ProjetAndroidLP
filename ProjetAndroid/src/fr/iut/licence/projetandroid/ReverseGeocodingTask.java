@@ -13,7 +13,7 @@ import android.os.AsyncTask;
 /**
  * The Class ReverseGeocodingTask.
  */
-public class ReverseGeocodingTask extends AsyncTask<String, String, String>
+public class ReverseGeocodingTask extends AsyncTask<String, Void, String>
 {
 	/** The m context. */
 	private final Context				mContext;
