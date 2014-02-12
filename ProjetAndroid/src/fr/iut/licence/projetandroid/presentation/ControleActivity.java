@@ -20,49 +20,16 @@ import fr.iut.licence.projetandroid.R;
  */
 public class ControleActivity extends Activity
 {
+	/** The m context. */
+	private Context		mContext;
 	/** The m densité semi. */
 	private EditText	mDensitéSemi;
 	/** The m ecartement. */
 	private EditText	mEcartement;
-	/** The m nb rangs. */
-	private TextView	mNbRangs;
 	/** The m nb grains. */
 	private TextView	mNbGrains;
-	/** The m context. */
-	private Context		mContext;
-
-	/* _________________________________________________________ */
-	/**
-	 * On create.
-	 * 
-	 * @param savedInstanceState
-	 *            the saved instance state
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
-	@Override
-	protected void onCreate(final Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_controle);
-		initComponents();
-		loadExtra();
-		final ActionBar actionBar = getActionBar();
-		actionBar.setTitle("Controle");
-		actionBar.setDisplayHomeAsUpEnabled(true);
-	}
-
-	/**
-	 * Load extra.
-	 */
-	private void loadExtra()
-	{
-		final Intent intent = getIntent();
-		final String result = intent.getStringExtra("densiteSemi");
-		if (result != null)
-		{
-			mDensitéSemi.setText(result);
-		}
-	}
+	/** The m nb rangs. */
+	private TextView	mNbRangs;
 
 	/**
 	 * Inits the components.
@@ -78,48 +45,6 @@ public class ControleActivity extends Activity
 		{
 			/* _________________________________________________________ */
 			/**
-			 * Before text changed.
-			 * 
-			 * @param arg0
-			 *            the arg0
-			 * @param arg1
-			 *            the arg1
-			 * @param arg2
-			 *            the arg2
-			 * @param arg3
-			 *            the arg3
-			 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence,
-			 *      int, int, int)
-			 */
-			@Override
-			public void beforeTextChanged(final CharSequence arg0,
-					final int arg1, final int arg2, final int arg3)
-			{
-			}
-
-			/* _________________________________________________________ */
-			/**
-			 * On text changed.
-			 * 
-			 * @param arg0
-			 *            the arg0
-			 * @param arg1
-			 *            the arg1
-			 * @param arg2
-			 *            the arg2
-			 * @param arg3
-			 *            the arg3
-			 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence,
-			 *      int, int, int)
-			 */
-			@Override
-			public void onTextChanged(final CharSequence arg0, final int arg1,
-					final int arg2, final int arg3)
-			{
-			}
-
-			/* _________________________________________________________ */
-			/**
 			 * After text changed.
 			 * 
 			 * @param s
@@ -127,7 +52,8 @@ public class ControleActivity extends Activity
 			 * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
 			 */
 			@Override
-			public void afterTextChanged(final Editable s)
+			public void afterTextChanged(
+					@SuppressWarnings("unused") final Editable s)
 			{
 				long densité = 0;
 				long ecartement = 0;
@@ -170,9 +96,86 @@ public class ControleActivity extends Activity
 					mNbGrains.setText("0");
 				}
 			}
+
+			/* _________________________________________________________ */
+			/**
+			 * Before text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
+			@SuppressWarnings("unused")
+			@Override
+			public void beforeTextChanged(final CharSequence arg0,
+					final int arg1, final int arg2, final int arg3)
+			{
+			}
+
+			/* _________________________________________________________ */
+			/**
+			 * On text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
+			@SuppressWarnings("unused")
+			@Override
+			public void onTextChanged(final CharSequence arg0, final int arg1,
+					final int arg2, final int arg3)
+			{
+			}
 		};
 		mDensitéSemi.addTextChangedListener(tw);
 		mEcartement.addTextChangedListener(tw);
+	}
+
+	/**
+	 * Load extra.
+	 */
+	private void loadExtra()
+	{
+		final Intent intent = getIntent();
+		final String result = intent.getStringExtra("densiteSemi");
+		if (result != null)
+		{
+			mDensitéSemi.setText(result);
+		}
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * On create.
+	 * 
+	 * @param savedInstanceState
+	 *            the saved instance state
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(final Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_controle);
+		initComponents();
+		loadExtra();
+		final ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Controle");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	/* _________________________________________________________ */

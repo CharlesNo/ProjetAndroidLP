@@ -1,7 +1,5 @@
 package fr.iut.licence.projetandroid.presentation;
 
-import java.util.List;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -25,9 +23,22 @@ import fr.iut.licence.projetandroid.persistence.DaoUtils;
  */
 public class ListeParcelleActivity extends Activity
 {
+	/** The m array plot. */
+	private PlotArrayAdapter	mArrayPlot;
 	/** The m context. */
-	private Context		mContext;
-	private PlotArrayAdapter mArrayPlot;
+	private Context				mContext;
+
+	/* _________________________________________________________ */
+	/**
+	 * Adds the plot.
+	 * 
+	 * @param plot
+	 *            the plot
+	 */
+	public void addPlot(final Plot plot)
+	{
+		mArrayPlot.addPlot(plot);
+	}
 
 	/* _________________________________________________________ */
 	/**
@@ -44,8 +55,8 @@ public class ListeParcelleActivity extends Activity
 		setContentView(R.layout.activity_listeparcelle);
 		mContext = this;
 		final ListView list = (ListView) findViewById(R.id.liste);
-		mArrayPlot = new PlotArrayAdapter(this,(List<Plot>) DaoUtils.getAllData(this, Plot.class),
-				Constantes.TYPE_SEMANCE);
+		mArrayPlot = new PlotArrayAdapter(this, DaoUtils.getAllData(this,
+				Plot.class), Constantes.TYPE_SEMANCE);
 		list.setAdapter(mArrayPlot);
 		list.setOnItemClickListener(new OnItemClickListener()
 		{
@@ -64,12 +75,14 @@ public class ListeParcelleActivity extends Activity
 			 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
 			 *      android.view.View, int, long)
 			 */
+			@SuppressWarnings("unused")
 			@Override
 			public void onItemClick(final AdapterView<?> arg0, final View view,
 					final int position, final long id)
 			{
 				final Bundle bundle = new Bundle();
-				bundle.putSerializable("plot", mArrayPlot.getListPlot().get(position));
+				bundle.putSerializable("plot",
+						mArrayPlot.getListPlot().get(position));
 				final Intent intent = new Intent(mContext, PlotActivty.class);
 				intent.putExtra("bundle", bundle);
 				startActivity(intent);
@@ -79,10 +92,6 @@ public class ListeParcelleActivity extends Activity
 		ac.show();
 	}
 
-	public void addPlot(Plot plot){
-		mArrayPlot.addPlot(plot);
-	}
-	
 	/* _________________________________________________________ */
 	/**
 	 * On create options menu.
@@ -138,10 +147,17 @@ public class ListeParcelleActivity extends Activity
 		}
 		return true;
 	}
-	
+
+	/* _________________________________________________________ */
+	/**
+	 * On resume.
+	 * 
+	 * @see android.app.Activity#onResume()
+	 */
 	@Override
-	protected void onResume() {
-		mArrayPlot.setListPlot((List<Plot>) DaoUtils.getAllData(this, Plot.class));
+	protected void onResume()
+	{
+		mArrayPlot.setListPlot(DaoUtils.getAllData(this, Plot.class));
 		super.onResume();
 	}
 }

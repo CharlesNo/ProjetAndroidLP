@@ -1,7 +1,6 @@
 package fr.iut.licence.projetandroid;
 
 import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +17,11 @@ import fr.iut.licence.projetandroid.entities.ViewHolder;
 public class PlotArrayAdapter extends BaseAdapter
 {
 	/** The m context. */
-	private final Context		mContext;
+	private final Context	mContext;
 	/** The m values. */
-	private List<Plot>	mValues;
-
-
+	private List<Plot>		mValues;
 	/** The type. */
-	private final int			type;
+	private final int		type;
 
 	/**
 	 * Instantiates a new plot array adapter.
@@ -44,55 +41,16 @@ public class PlotArrayAdapter extends BaseAdapter
 		type = typeAffich;
 	}
 
-	/* _________________________________________________________ */
 	/**
-	 * Gets the view.
+	 * Adds the plot.
 	 * 
-	 * @param position
-	 *            the position
-	 * @param convertView
-	 *            the convert view
-	 * @param parent
-	 *            the parent
-	 * @return the view
-	 * @see android.widget.Adapter#getView(int, android.view.View,
-	 *      android.view.ViewGroup)
+	 * @param plot
+	 *            the plot
 	 */
-	@Override
-	public View getView(final int position, View convertView,
-			final ViewGroup parent)
+	public void addPlot(final Plot plot)
 	{
-		ViewHolder holder;
-		if (convertView == null)
-		{
-			convertView = LayoutInflater.from(mContext).inflate(
-					R.layout.list_plot, parent, false);
-			holder = new ViewHolder();
-			holder.plotName = (TextView) convertView.findViewById(R.id.tv_plot);
-			holder.plotType = (TextView) convertView.findViewById(R.id.tv_type);
-			// Store the holder with the view.
-			convertView.setTag(holder);
-		}
-		else
-		{
-			// Else re-assign
-			holder = (ViewHolder) convertView.getTag();
-		}
-		final Plot p = mValues.get(position);
-		holder.plotName.setText(p.getName());
-		switch (type)
-		{
-		case Constantes.TYPE_SURFACE:
-			holder.plotType.setText(String.valueOf(p.getSurface()));
-			break;
-		case Constantes.TYPE_SEMANCE:
-			holder.plotType.setText(p.getGrowing());
-			break;
-		default:
-			holder.plotType.setText(p.getGrowing());
-			break;
-		}
-		return convertView;
+		mValues.add(plot);
+		notifyDataSetChanged();
 	}
 
 	/* _________________________________________________________ */
@@ -138,22 +96,90 @@ public class PlotArrayAdapter extends BaseAdapter
 		return mValues.get(arg0).getId();
 	}
 
-	public List<Plot> getListPlot() {
+	/**
+	 * Gets the list plot.
+	 * 
+	 * @return the list plot
+	 */
+	public List<Plot> getListPlot()
+	{
 		return mValues;
 	}
 
-	public void setListPlot(List<Plot> list ){
-		mValues = list;
-		notifyDataSetChanged();
+	/* _________________________________________________________ */
+	/**
+	 * Gets the view.
+	 * 
+	 * @param position
+	 *            the position
+	 * @param convertView
+	 *            the convert view
+	 * @param parent
+	 *            the parent
+	 * @return the view
+	 * @see android.widget.Adapter#getView(int, android.view.View,
+	 *      android.view.ViewGroup)
+	 */
+	@Override
+	public View getView(final int position, View convertView,
+			final ViewGroup parent)
+	{
+		ViewHolder holder;
+		if (convertView == null)
+		{
+			convertView = LayoutInflater.from(mContext).inflate(
+					R.layout.list_plot, parent, false);
+			holder = new ViewHolder();
+			holder.plotName = (TextView) convertView.findViewById(R.id.tv_plot);
+			holder.plotType = (TextView) convertView.findViewById(R.id.tv_type);
+			// Store the holder with the view.
+			convertView.setTag(holder);
+		}
+		else
+		{
+			// Else re-assign
+			holder = (ViewHolder) convertView.getTag();
+		}
+		final Plot p = mValues.get(position);
+		holder.plotName.setText(p.getName());
+		switch (type)
+		{
+			case Constantes.TYPE_SURFACE:
+				holder.plotType.setText(String.valueOf(p.getSurface()));
+				break;
+			case Constantes.TYPE_SEMANCE:
+				holder.plotType.setText(p.getGrowing());
+				break;
+			default:
+				holder.plotType.setText(p.getGrowing());
+				break;
+		}
+		return convertView;
 	}
-	public boolean remove(Object object) {
+
+	/**
+	 * Removes the.
+	 * 
+	 * @param object
+	 *            the object
+	 * @return true, if successful
+	 */
+	public boolean remove(final Object object)
+	{
 		mValues.remove(object);
 		notifyDataSetChanged();
 		return true;
 	}
 
-	public void addPlot(Plot plot) {
-		mValues.add(plot);
+	/**
+	 * Sets the list plot.
+	 * 
+	 * @param list
+	 *            the new list plot
+	 */
+	public void setListPlot(final List<Plot> list)
+	{
+		mValues = list;
 		notifyDataSetChanged();
 	}
 }

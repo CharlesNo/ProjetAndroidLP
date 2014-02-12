@@ -27,47 +27,31 @@ import fr.iut.licence.projetandroid.persistence.DaoUtils;
  * The Class AjoutParcelleActivity.
  */
 public class AjoutParcelleActivity extends Activity implements OnClickListener,
-LocationListener, TaskFinishedListener
+		LocationListener, TaskFinishedListener
 {
+	/** The m adresse. */
+	private EditText		mAdresse;
+	/** The m location. */
+	private Location		mLocation;
+	// GPS
+	/** The m location manager. */
+	private LocationManager	mLocationManager;
+	/** The m name. */
+	private EditText		mName;
+	/** The m saved. */
+	private boolean			mSaved	= false;
 	/** The m spinner. */
 	private Spinner			mSpinner;
 	/** The m spinner prec. */
 	private Spinner			mSpinnerPrec;
-	/** The m name. */
-	private EditText		mName;
 	/** The m surface. */
 	private NumberPicker	mSurface;
-	/** The m adresse. */
-	private EditText		mAdresse;
-	// GPS
-	/** The m location manager. */
-	private LocationManager	mLocationManager;
-	/** The m location. */
-	private Location		mLocation;
 
-	private boolean mSaved = false;;
-	/* _________________________________________________________ */
 	/**
-	 * On create.
-	 * 
-	 * @param savedInstanceState
-	 *            the saved instance state
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * Load component.
 	 */
-	@Override
-	protected void onCreate(final Bundle savedInstanceState)
+	private void loadComponent()
 	{
-		super.onCreate(savedInstanceState);
-
-		final ActionBar actionBar = getActionBar();
-		actionBar.setTitle("Ajout Parcelle");
-		actionBar.setDisplayHomeAsUpEnabled(true);
-
-		setContentView(R.layout.activity_ajoutparcelle);
-		loadComponent();
-	}
-
-	private void loadComponent() {
 		mName = (EditText) findViewById(R.id.ed_nom);
 		mSurface = (NumberPicker) findViewById(R.id.np_surface);
 		mSpinner = (Spinner) findViewById(R.id.sp_culture);
@@ -100,74 +84,64 @@ LocationListener, TaskFinishedListener
 	public void onClick(final View v)
 	{
 		switch (v.getId())
-		{   
-		case R.id.b_ajouter:
-			Button b_ajouter = (Button) findViewById(R.id.b_ajouter);
-			
-			if (mName.getText().toString().equals("") )
-			{
-				Toast.makeText(this, "Nom non renseignée",
-						Toast.LENGTH_SHORT).show();
-			}
-			else if (mAdresse.getText().toString().equals(""))
-			{
-				Toast.makeText(this, "Adresse non renseignée",
-						Toast.LENGTH_SHORT).show();
-			}
-			else
-			{
-				b_ajouter.setEnabled(false);
-				final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
-						this, this, mLocation);
-				mSaved = true;
-				reverseGeocodingTask.execute(mAdresse.getText().toString());
-			}			
-
-			break;
-		case R.id.ib_map:
-			mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-			if (mLocationManager
-					.isProviderEnabled(LocationManager.GPS_PROVIDER))
-			{
-				mLocationManager.requestLocationUpdates(
-						LocationManager.GPS_PROVIDER, 3000, 0, this);
-			}
-			else
-			{
-				Toast.makeText(this, "GPS non disponible.",
-						Toast.LENGTH_SHORT).show();
-			}
-			break;
-		default:
-			break;
+		{
+			case R.id.b_ajouter:
+				final Button b_ajouter = (Button) findViewById(R.id.b_ajouter);
+				if (mName.getText().toString().equals(""))
+				{
+					Toast.makeText(this, "Nom non renseignée",
+							Toast.LENGTH_SHORT).show();
+				}
+				else if (mAdresse.getText().toString().equals(""))
+				{
+					Toast.makeText(this, "Adresse non renseignée",
+							Toast.LENGTH_SHORT).show();
+				}
+				else
+				{
+					b_ajouter.setEnabled(false);
+					final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
+							this, this, mLocation);
+					mSaved = true;
+					reverseGeocodingTask.execute(mAdresse.getText().toString());
+				}
+				break;
+			case R.id.ib_map:
+				mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+				if (mLocationManager
+						.isProviderEnabled(LocationManager.GPS_PROVIDER))
+				{
+					mLocationManager.requestLocationUpdates(
+							LocationManager.GPS_PROVIDER, 3000, 0, this);
+				}
+				else
+				{
+					Toast.makeText(this, "GPS non disponible.",
+							Toast.LENGTH_SHORT).show();
+				}
+				break;
+			default:
+				break;
 		}
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			break;
-		default:
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
+	/* _________________________________________________________ */
 	/**
-	 * Sauvegarde une pacelle.
+	 * On create.
+	 * 
+	 * @param savedInstanceState
+	 *            the saved instance state
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
-	private void savePlot()
+	@Override
+	protected void onCreate(final Bundle savedInstanceState)
 	{
-		final Plot plot = new Plot();
-		plot.setName(mName.getText().toString());
-		plot.setSurface(mSurface.getValue());
-		plot.setGrowing(mSpinner.getSelectedItem().toString());
-		plot.setLast_growing(mSpinnerPrec.getSelectedItem().toString());
-		DaoUtils.storeSingleData(this, plot);
-		Toast.makeText(this, "Parcelle ajoutée", Toast.LENGTH_SHORT).show();
-		finish();
+		super.onCreate(savedInstanceState);
+		final ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Ajout Parcelle");
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		setContentView(R.layout.activity_ajoutparcelle);
+		loadComponent();
 	}
 
 	/* _________________________________________________________ */
@@ -192,12 +166,36 @@ LocationListener, TaskFinishedListener
 		else
 		{
 			Toast.makeText(this, "Location non définie.", Toast.LENGTH_SHORT)
-			.show();
+					.show();
 		}
-		if( mLocationManager!= null)
+		if (mLocationManager != null)
+		{
 			mLocationManager.removeUpdates(this);
+		}
 	}
 
+	/* _________________________________________________________ */
+	/**
+	 * On options item selected.
+	 * 
+	 * @param item
+	 *            the item
+	 * @return true, if successful
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(final MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+			case android.R.id.home:
+				finish();
+				break;
+			default:
+				break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	/* _________________________________________________________ */
 	/**
@@ -207,6 +205,7 @@ LocationListener, TaskFinishedListener
 	 *            the arg0
 	 * @see android.location.LocationListener#onProviderDisabled(java.lang.String)
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void onProviderDisabled(final String arg0)
 	{
@@ -220,6 +219,7 @@ LocationListener, TaskFinishedListener
 	 *            the arg0
 	 * @see android.location.LocationListener#onProviderEnabled(java.lang.String)
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void onProviderEnabled(final String arg0)
 	{
@@ -238,6 +238,7 @@ LocationListener, TaskFinishedListener
 	 * @see android.location.LocationListener#onStatusChanged(java.lang.String,
 	 *      int, android.os.Bundle)
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void onStatusChanged(final String arg0, final int arg1,
 			final Bundle arg2)
@@ -259,14 +260,34 @@ LocationListener, TaskFinishedListener
 		{
 			mAdresse.setText(String.format("%s, %s, %s", adresse
 					.getMaxAddressLineIndex() > 0 ? adresse.getAddressLine(0)
-							: " ", adresse.getLocality(), adresse.getCountryName()));
+					: " ", adresse.getLocality(), adresse.getCountryName()));
 			mLocation.setLatitude(adresse.getLatitude());
 			mLocation.setLongitude(adresse.getLongitude());
 		}
-		if(mSaved)
+		if (mSaved)
+		{
 			if ((mLocation.getLatitude() != 0)
 					&& (mLocation.getLongitude() != 0))
+			{
 				savePlot();
+			}
+		}
 		mSaved = false;
+	}
+
+	/**
+	 * Sauvegarde une pacelle.
+	 */
+	private void savePlot()
+	{
+		final Plot plot = new Plot();
+		plot.setName(mName.getText().toString());
+		plot.setSurface(mSurface.getValue());
+		plot.setGrowing(mSpinner.getSelectedItem().toString());
+		plot.setLast_growing(mSpinnerPrec.getSelectedItem().toString());
+		plot.setAdresse(mAdresse.getText().toString());
+		DaoUtils.storeSingleData(this, plot);
+		Toast.makeText(this, "Parcelle ajoutée", Toast.LENGTH_SHORT).show();
+		finish();
 	}
 }

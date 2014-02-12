@@ -31,62 +31,24 @@ import fr.iut.licence.projetandroid.entities.Plot;
  */
 public class CommandeActivity extends Activity implements OnClickListener
 {
-	/** The m pd sem nec. */
-	private EditText	mPdSemNec;
-	/** The m surface. */
-	private EditText	mSurface;
-	/** The m condi. */
-	private EditText	mCondi;
-	/** The m resultat. */
-	private TextView	mResultat;
-	/** The m context. */
-	private Context		mContext;
 	/** The m activity. */
 	private Activity	mActivity;
-	/** The m densitee semi. */
-	private String		mDensiteeSemi;
 	/** The m but. */
 	private Button		mBut;
 	/** The m but parcelles. */
 	private ImageButton	mButParcelles;
-
-	/* _________________________________________________________ */
-	/**
-	 * On create.
-	 * 
-	 * @param savedInstanceState
-	 *            the saved instance state
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
-	@Override
-	protected void onCreate(final Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_commande);
-		initComponents();
-		loadExtra();
-		final ActionBar actionBar = getActionBar();
-		actionBar.setTitle("Commande");
-		actionBar.setDisplayHomeAsUpEnabled(true);
-	}
-
-	/**
-	 * Load extra.
-	 */
-	private void loadExtra()
-	{
-		final Intent intent = getIntent();
-		String result = intent.getStringExtra("pdtSemence");
-		if (result != null)
-		{
-			mPdSemNec.setText(result);
-		}
-		result = intent.getStringExtra("densiteSemi");
-		if (result != null)
-		{
-			mDensiteeSemi = result;
-		}
-	}
+	/** The m condi. */
+	private EditText	mCondi;
+	/** The m context. */
+	private Context		mContext;
+	/** The m densitee semi. */
+	private String		mDensiteeSemi;
+	/** The m pd sem nec. */
+	private EditText	mPdSemNec;
+	/** The m resultat. */
+	private TextView	mResultat;
+	/** The m surface. */
+	private EditText	mSurface;
 
 	/**
 	 * Inits the components.
@@ -107,48 +69,6 @@ public class CommandeActivity extends Activity implements OnClickListener
 		{
 			/* _________________________________________________________ */
 			/**
-			 * Before text changed.
-			 * 
-			 * @param arg0
-			 *            the arg0
-			 * @param arg1
-			 *            the arg1
-			 * @param arg2
-			 *            the arg2
-			 * @param arg3
-			 *            the arg3
-			 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence,
-			 *      int, int, int)
-			 */
-			@Override
-			public void beforeTextChanged(final CharSequence arg0,
-					final int arg1, final int arg2, final int arg3)
-			{
-			}
-
-			/* _________________________________________________________ */
-			/**
-			 * On text changed.
-			 * 
-			 * @param arg0
-			 *            the arg0
-			 * @param arg1
-			 *            the arg1
-			 * @param arg2
-			 *            the arg2
-			 * @param arg3
-			 *            the arg3
-			 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence,
-			 *      int, int, int)
-			 */
-			@Override
-			public void onTextChanged(final CharSequence arg0, final int arg1,
-					final int arg2, final int arg3)
-			{
-			}
-
-			/* _________________________________________________________ */
-			/**
 			 * After text changed.
 			 * 
 			 * @param s
@@ -156,7 +76,8 @@ public class CommandeActivity extends Activity implements OnClickListener
 			 * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
 			 */
 			@Override
-			public void afterTextChanged(final Editable s)
+			public void afterTextChanged(
+					@SuppressWarnings("unused") final Editable s)
 			{
 				long i = 0;
 				long j = 0;
@@ -202,10 +123,72 @@ public class CommandeActivity extends Activity implements OnClickListener
 				}
 				mResultat.setText(String.valueOf((i * j) / x));
 			}
+
+			/* _________________________________________________________ */
+			/**
+			 * Before text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
+			@SuppressWarnings("unused")
+			@Override
+			public void beforeTextChanged(final CharSequence arg0,
+					final int arg1, final int arg2, final int arg3)
+			{
+			}
+
+			/* _________________________________________________________ */
+			/**
+			 * On text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
+			@SuppressWarnings("unused")
+			@Override
+			public void onTextChanged(final CharSequence arg0, final int arg1,
+					final int arg2, final int arg3)
+			{
+			}
 		};
 		mPdSemNec.addTextChangedListener(tw);
 		mSurface.addTextChangedListener(tw);
 		mCondi.addTextChangedListener(tw);
+	}
+
+	/**
+	 * Load extra.
+	 */
+	private void loadExtra()
+	{
+		final Intent intent = getIntent();
+		String result = intent.getStringExtra("pdtSemence");
+		if (result != null)
+		{
+			mPdSemNec.setText(result);
+		}
+		result = intent.getStringExtra("densiteSemi");
+		if (result != null)
+		{
+			mDensiteeSemi = result;
+		}
 	}
 
 	/* _________________________________________________________ */
@@ -265,6 +248,26 @@ public class CommandeActivity extends Activity implements OnClickListener
 			default:
 				break;
 		}
+	}
+
+	/* _________________________________________________________ */
+	/**
+	 * On create.
+	 * 
+	 * @param savedInstanceState
+	 *            the saved instance state
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(final Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_commande);
+		initComponents();
+		loadExtra();
+		final ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Commande");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	/* _________________________________________________________ */

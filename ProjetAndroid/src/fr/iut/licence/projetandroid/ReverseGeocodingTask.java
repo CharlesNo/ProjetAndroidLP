@@ -3,7 +3,6 @@ package fr.iut.licence.projetandroid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -13,16 +12,16 @@ import android.os.AsyncTask;
 /**
  * The Class ReverseGeocodingTask.
  */
-public class ReverseGeocodingTask extends AsyncTask<String, Void, String>
+public class ReverseGeocodingTask extends AsyncTask<String, Void, Void>
 {
+	/** The addrs. */
+	List<Address>						addrs	= null;
 	/** The m context. */
 	private final Context				mContext;
-	/** The mlocation. */
-	private final Location				mlocation;
 	/** The m listener. */
 	private final TaskFinishedListener	mListener;
-	
-	List<Address> addrs = null;
+	/** The mlocation. */
+	private final Location				mlocation;
 
 	/**
 	 * Instantiates a new reverse geocoding task.
@@ -53,7 +52,7 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, String>
 	 * @see android.os.AsyncTask#doInBackground
 	 */
 	@Override
-	protected String doInBackground(final String... arg0)
+	protected Void doInBackground(final String... arg0)
 	{
 		final Geocoder geo = new Geocoder(mContext, Locale.getDefault());
 		final Location loc = mlocation;
@@ -71,20 +70,27 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, String>
 				{
 					addrs = geo.getFromLocation(loc.getAltitude(),
 							loc.getLongitude(), 1);
-				}  
+				}
 			}
-			
 		}
 		catch (final IOException e)
 		{
 			e.printStackTrace();
 		}
-
-
-		return "";
+		return null;
 	}
+
+	/* _________________________________________________________ */
+	/**
+	 * On post execute.
+	 * 
+	 * @param result
+	 *            the result
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
-	protected void onPostExecute(String result) {
+	protected void onPostExecute(@SuppressWarnings("unused") final Void result)
+	{
 		// on trouve une adresse
 		if ((addrs != null) && (addrs.size() > 0))
 		{

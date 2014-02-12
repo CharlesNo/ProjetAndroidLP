@@ -23,16 +23,36 @@ import fr.iut.licence.projetandroid.R;
  */
 public class ConvertisseurActivity extends Activity implements OnClickListener
 {
+	/** The m button commande. */
+	private Button		mButtonCommande;
+	/** The m context. */
+	private Context		mContext;
 	/** The m densité. */
 	private EditText	mDensité;
 	/** The m pgm. */
 	private EditText	mPGM;
 	/** The m result. */
 	private TextView	mResult;
-	/** The m button commande. */
-	private Button		mButtonCommande;
-	/** The m context. */
-	private Context		mContext;
+
+	/* _________________________________________________________ */
+	/**
+	 * On click.
+	 * 
+	 * @param v
+	 *            the v
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(final View v)
+	{
+		if (v.getId() == R.id.b_convertisseur_commande)
+		{
+			final Intent intent = new Intent(this, CommandeActivity.class);
+			intent.putExtra("pdtSemence", mResult.getText().toString());
+			intent.putExtra("densiteSemi", mDensité.getText().toString());
+			startActivity(intent);
+		}
+	}
 
 	/* _________________________________________________________ */
 	/**
@@ -60,48 +80,6 @@ public class ConvertisseurActivity extends Activity implements OnClickListener
 		{
 			/* _________________________________________________________ */
 			/**
-			 * Before text changed.
-			 * 
-			 * @param arg0
-			 *            the arg0
-			 * @param arg1
-			 *            the arg1
-			 * @param arg2
-			 *            the arg2
-			 * @param arg3
-			 *            the arg3
-			 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence,
-			 *      int, int, int)
-			 */
-			@Override
-			public void beforeTextChanged(final CharSequence arg0,
-					final int arg1, final int arg2, final int arg3)
-			{
-			}
-
-			/* _________________________________________________________ */
-			/**
-			 * On text changed.
-			 * 
-			 * @param arg0
-			 *            the arg0
-			 * @param arg1
-			 *            the arg1
-			 * @param arg2
-			 *            the arg2
-			 * @param arg3
-			 *            the arg3
-			 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence,
-			 *      int, int, int)
-			 */
-			@Override
-			public void onTextChanged(final CharSequence arg0, final int arg1,
-					final int arg2, final int arg3)
-			{
-			}
-
-			/* _________________________________________________________ */
-			/**
 			 * After text changed.
 			 * 
 			 * @param s
@@ -109,7 +87,8 @@ public class ConvertisseurActivity extends Activity implements OnClickListener
 			 * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
 			 */
 			@Override
-			public void afterTextChanged(final Editable s)
+			public void afterTextChanged(
+					@SuppressWarnings("unused") final Editable s)
 			{
 				long i = 0;
 				long j = 0;
@@ -144,6 +123,50 @@ public class ConvertisseurActivity extends Activity implements OnClickListener
 					mButtonCommande.setVisibility(View.GONE);
 				}
 				mResult.setText(String.valueOf(i * j));
+			}
+
+			/* _________________________________________________________ */
+			/**
+			 * Before text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
+			@SuppressWarnings("unused")
+			@Override
+			public void beforeTextChanged(final CharSequence arg0,
+					final int arg1, final int arg2, final int arg3)
+			{
+			}
+
+			/* _________________________________________________________ */
+			/**
+			 * On text changed.
+			 * 
+			 * @param arg0
+			 *            the arg0
+			 * @param arg1
+			 *            the arg1
+			 * @param arg2
+			 *            the arg2
+			 * @param arg3
+			 *            the arg3
+			 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence,
+			 *      int, int, int)
+			 */
+			@SuppressWarnings("unused")
+			@Override
+			public void onTextChanged(final CharSequence arg0, final int arg1,
+					final int arg2, final int arg3)
+			{
 			}
 		};
 		mDensité.addTextChangedListener(tw);
@@ -206,25 +229,5 @@ public class ConvertisseurActivity extends Activity implements OnClickListener
 				return super.onOptionsItemSelected(item);
 		}
 		return true;
-	}
-
-	/* _________________________________________________________ */
-	/**
-	 * On click.
-	 * 
-	 * @param v
-	 *            the v
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
-	@Override
-	public void onClick(final View v)
-	{
-		if (v.getId() == R.id.b_convertisseur_commande)
-		{
-			final Intent intent = new Intent(this, CommandeActivity.class);
-			intent.putExtra("pdtSemence", mResult.getText().toString());
-			intent.putExtra("densiteSemi", mDensité.getText().toString());
-			startActivity(intent);
-		}
 	}
 }
