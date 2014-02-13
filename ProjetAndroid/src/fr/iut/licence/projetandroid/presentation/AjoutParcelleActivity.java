@@ -101,7 +101,7 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 				{
 					b_ajouter.setEnabled(false);
 					final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
-							this, this, mLocation);
+							this,this,this, mLocation);
 					mSaved = true;
 					reverseGeocodingTask.execute(mAdresse.getText().toString());
 				}
@@ -112,17 +112,19 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 						.isProviderEnabled(LocationManager.GPS_PROVIDER))
 				{
 					mLocationManager.requestLocationUpdates(
-							LocationManager.GPS_PROVIDER, 3000, 0, this);
+							LocationManager.GPS_PROVIDER, 0, 0, this);
 				}
 				else
 				{
-					Toast.makeText(this, "GPS non disponible.",
-							Toast.LENGTH_SHORT).show();
+					mLocationManager.requestLocationUpdates(
+							LocationManager.NETWORK_PROVIDER, 0, 0, this);
 				}
 				break;
 			default:
 				break;
+				
 		}
+
 	}
 
 	/* _________________________________________________________ */
@@ -160,7 +162,7 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 			mLocation.setLatitude(location.getLatitude());
 			mLocation.setLongitude(location.getLongitude());
 			final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
-					this, this, mLocation);
+					this,this,this, mLocation);
 			reverseGeocodingTask.execute();
 		}
 		else

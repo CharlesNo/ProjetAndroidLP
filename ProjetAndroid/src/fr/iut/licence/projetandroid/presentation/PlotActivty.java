@@ -4,14 +4,26 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import fr.iut.licence.projetandroid.R;
 import fr.iut.licence.projetandroid.entities.Plot;
+
 
 /**
  * The Class PlotActivty.
  */
 public class PlotActivty extends Activity
 {
+	
+	
+	private GoogleMap mGoogleMap;
+	private Marker marker;
 	/* _________________________________________________________ */
 	/**
 	 * On create.
@@ -26,6 +38,11 @@ public class PlotActivty extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_plot);
 		// Load plot from intent
+		loadComponent();
+		
+	}
+
+	private void loadComponent() {
 		final Intent intent = getIntent();
 		final Bundle bundle = intent.getBundleExtra("bundle");
 		final Plot plot = (Plot) bundle.getSerializable("plot");
@@ -40,5 +57,16 @@ public class PlotActivty extends Activity
 		tv_cult.setText(plot.getGrowing());
 		tv_cultPrev.setText(plot.getLast_growing());
 		tv_surface.setText(String.valueOf(plot.getSurface()));
+		
+//		MapFragment mMapFragment = MapFragment.newInstance();
+//		 android.app.FragmentTransaction fragmentTransaction =
+//		         getFragmentManager().beginTransaction();
+//		 fragmentTransaction.add(R.id.mapFragment, mMapFragment);
+//		 fragmentTransaction.commit();
+//		 MapFragment mf = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+//		 mGoogleMap = mf.getMap();
+//
+//		marker = mGoogleMap.addMarker(new MarkerOptions().title(getString(R.string.parcelles))
+//				.position(new LatLng(plot.getLatitude(), plot.getLongitude())));
 	}
 }

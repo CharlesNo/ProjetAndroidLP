@@ -3,16 +3,20 @@ package fr.iut.licence.projetandroid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * The Class ReverseGeocodingTask.
  */
-public class ReverseGeocodingTask extends AsyncTask<String, Void, Void>
+public class ReverseGeocodingTask extends AsyncTask<String, Void, String>
 {
 	/** The addrs. */
 	List<Address>						addrs	= null;
@@ -23,6 +27,7 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, Void>
 	/** The mlocation. */
 	private final Location				mlocation;
 
+	private final Activity mActivity;
 	/**
 	 * Instantiates a new reverse geocoding task.
 	 * 
@@ -33,13 +38,14 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, Void>
 	 * @param location
 	 *            the location
 	 */
-	public ReverseGeocodingTask(final Context context,
+	public ReverseGeocodingTask(final Context context,Activity activity,
 			final TaskFinishedListener listener, final Location location)
 	{
 		super();
 		mContext = context;
 		mListener = listener;
 		mlocation = location;
+		mActivity= activity;
 	}
 
 	/* _________________________________________________________ */
@@ -52,7 +58,7 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, Void>
 	 * @see android.os.AsyncTask#doInBackground
 	 */
 	@Override
-	protected Void doInBackground(final String... arg0)
+	protected String doInBackground(final String... arg0)
 	{
 		final Geocoder geo = new Geocoder(mContext, Locale.getDefault());
 		final Location loc = mlocation;
@@ -76,6 +82,7 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, Void>
 		catch (final IOException e)
 		{
 			e.printStackTrace();
+			return "error";
 		}
 		return null;
 	}
@@ -89,8 +96,13 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, Void>
 	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 	 */
 	@Override
-	protected void onPostExecute(@SuppressWarnings("unused") final Void result)
+	protected void onPostExecute(final String result)
 	{
+		if(result.equals("error")){
+			Toast.makeText(mContext, "le service de geocoding n'est pas disponible", Toast.LENGTH_SHORT).show();
+			Button button = (Button)mActivity.findViewById(R.id.b_ajouter);
+			button.setEnabled(true);
+		}
 		// on trouve une adresse
 		if ((addrs != null) && (addrs.size() > 0))
 		{
