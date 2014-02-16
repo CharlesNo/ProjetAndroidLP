@@ -74,17 +74,20 @@ public class ReverseGeocodingTask extends AsyncTask<String, Void, String>
 				}
 				else
 				{
-					addrs = geo.getFromLocation(loc.getAltitude(),
+					if(Geocoder.isPresent())
+						addrs = geo.getFromLocation(loc.getAltitude(),
 							loc.getLongitude(), 1);
+					else
+						Toast.makeText(mContext, "Le geocoder n'est pas présent.", Toast.LENGTH_SHORT).show();
 				}
 			}
 		}
 		catch (final IOException e)
 		{
-			e.printStackTrace();
+			// e.printStackTrace();
 			return "error";
 		}
-		return null;
+		return "";
 	}
 
 	/* _________________________________________________________ */

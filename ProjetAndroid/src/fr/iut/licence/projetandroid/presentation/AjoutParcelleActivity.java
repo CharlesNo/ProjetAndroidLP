@@ -3,9 +3,11 @@ package fr.iut.licence.projetandroid.presentation;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +29,7 @@ import fr.iut.licence.projetandroid.persistence.DaoUtils;
  * The Class AjoutParcelleActivity.
  */
 public class AjoutParcelleActivity extends Activity implements OnClickListener,
-		LocationListener, TaskFinishedListener
+LocationListener, TaskFinishedListener
 {
 	/** The m adresse. */
 	private EditText		mAdresse;
@@ -85,44 +87,47 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 	{
 		switch (v.getId())
 		{
-			case R.id.b_ajouter:
-				final Button b_ajouter = (Button) findViewById(R.id.b_ajouter);
-				if (mName.getText().toString().equals(""))
-				{
-					Toast.makeText(this, "Nom non renseignée",
-							Toast.LENGTH_SHORT).show();
-				}
-				else if (mAdresse.getText().toString().equals(""))
-				{
-					Toast.makeText(this, "Adresse non renseignée",
-							Toast.LENGTH_SHORT).show();
-				}
-				else
-				{
-					b_ajouter.setEnabled(false);
-					final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
-							this,this,this, mLocation);
-					mSaved = true;
-					reverseGeocodingTask.execute(mAdresse.getText().toString());
-				}
-				break;
-			case R.id.ib_map:
-				mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		case R.id.b_ajouter:
+			final Button b_ajouter = (Button) findViewById(R.id.b_ajouter);
+			if (mName.getText().toString().equals(""))
+			{
+				Toast.makeText(this, "Nom non renseignée",
+						Toast.LENGTH_SHORT).show();
+			}
+			else if (mAdresse.getText().toString().equals(""))
+			{
+				Toast.makeText(this, "Adresse non renseignée",
+						Toast.LENGTH_SHORT).show();
+			}
+			else
+			{
+				b_ajouter.setEnabled(false);
+				final ReverseGeocodingTask reverseGeocodingTask = new ReverseGeocodingTask(
+						this,this,this, mLocation);
+				mSaved = true;
+				reverseGeocodingTask.execute(mAdresse.getText().toString());
+			}
+			break;
+		case R.id.ib_map:
+			mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD
+					&& Geocoder.isPresent()) {
 				if (mLocationManager
 						.isProviderEnabled(LocationManager.GPS_PROVIDER))
 				{
 					mLocationManager.requestLocationUpdates(
-							LocationManager.GPS_PROVIDER, 0, 0, this);
+							LocationManager.GPS_PROVIDER, 2000, 0, this);
 				}
 				else
 				{
 					mLocationManager.requestLocationUpdates(
-							LocationManager.NETWORK_PROVIDER, 0, 0, this);
+							LocationManager.NETWORK_PROVIDER, 2000, 0, this);
 				}
-				break;
-			default:
-				break;
-				
+			}
+			break;
+		default:
+			break;
+
 		}
 
 	}
@@ -168,7 +173,7 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 		else
 		{
 			Toast.makeText(this, "Location non définie.", Toast.LENGTH_SHORT)
-					.show();
+			.show();
 		}
 		if (mLocationManager != null)
 		{
@@ -190,11 +195,11 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 	{
 		switch (item.getItemId())
 		{
-			case android.R.id.home:
-				finish();
-				break;
-			default:
-				break;
+		case android.R.id.home:
+			finish();
+			break;
+		default:
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -262,7 +267,7 @@ public class AjoutParcelleActivity extends Activity implements OnClickListener,
 		{
 			mAdresse.setText(String.format("%s, %s, %s", adresse
 					.getMaxAddressLineIndex() > 0 ? adresse.getAddressLine(0)
-					: " ", adresse.getLocality(), adresse.getCountryName()));
+							: " ", adresse.getLocality(), adresse.getCountryName()));
 			mLocation.setLatitude(adresse.getLatitude());
 			mLocation.setLongitude(adresse.getLongitude());
 		}

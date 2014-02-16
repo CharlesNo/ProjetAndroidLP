@@ -1,6 +1,8 @@
 package fr.iut.licence.projetandroid.presentation;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,16 +16,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import fr.iut.licence.projetandroid.R;
 import fr.iut.licence.projetandroid.entities.Plot;
 
-
 /**
  * The Class PlotActivty.
  */
 public class PlotActivty extends Activity
 {
-	
-	
+
 	private GoogleMap mGoogleMap;
 	private Marker marker;
+
 	/* _________________________________________________________ */
 	/**
 	 * On create.
@@ -39,7 +40,6 @@ public class PlotActivty extends Activity
 		setContentView(R.layout.activity_plot);
 		// Load plot from intent
 		loadComponent();
-		
 	}
 
 	private void loadComponent() {
@@ -57,15 +57,15 @@ public class PlotActivty extends Activity
 		tv_cult.setText(plot.getGrowing());
 		tv_cultPrev.setText(plot.getLast_growing());
 		tv_surface.setText(String.valueOf(plot.getSurface()));
-		
-//		MapFragment mMapFragment = MapFragment.newInstance();
-//		 android.app.FragmentTransaction fragmentTransaction =
-//		         getFragmentManager().beginTransaction();
-//		 fragmentTransaction.add(R.id.mapFragment, mMapFragment);
-//		 fragmentTransaction.commit();
-//		 MapFragment mf = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
-//		 mGoogleMap = mf.getMap();
-//
+
+	//		MapFragment mMapFragment = MapFragment.newInstance();
+	//		FragmentManager fm = getFragmentManager();
+	//		FragmentTransaction ft = fm.beginTransaction();
+	//		ft.add(R.id.map, mMapFragment);
+	//		ft.commit();
+	//		MapFragment mf = (MapFragment)fm.findFragmentById(R.id.map);
+	//		mGoogleMap = mf.getMap();
+
 //		marker = mGoogleMap.addMarker(new MarkerOptions().title(getString(R.string.parcelles))
 //				.position(new LatLng(plot.getLatitude(), plot.getLongitude())));
 	}
